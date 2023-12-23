@@ -1,0 +1,99 @@
+name: Deploy App on EC2
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_url:
+        description: 'Repository URL'
+        required: true
+      project_name:
+        description: 'Project Name'
+        required: true
+      user_name:
+        description: 'User Name'
+        required: true
+      host_port:
+        description: 'Host Port'
+        required: true
+      container_port:
+        description: 'Container Port'
+        required: true
+      entrypoint_array:
+        description: 'Entrypoint Array (JSON format)'
+        required: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.inputs.repo_url }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_URL }}
+          USER_NAME: ${{ github.event.inputs.user_name }}
+          PROJECT_NAME: ${{ github.event.inputs.project_name }}
+          ENTRYPOINT_ARRAY: ${{ github.event.inputs.entrypoint_array }}
+        run: |
+          if [ ! -f Dockerfile ]; then
+            printf "FROM node:slim\nRUN apt-get update && apt-get install -y curl ca-certificates && rm -rf /var/lib/apt/lists/*\nWORKDIR /code\nCOPY . /code\nRUN npm install --force\nENTRYPOINT $ENTRYPOINT_ARRAY\n" > Dockerfile || { echo "Dockerfile creation failed"; exit 1; }
+          fi
+          IMAGE_TAG="$USER_NAME-$PROJECT_NAME"
+          IMAGE_TAG=$(echo "$IMAGE_TAG" | tr '[:upper:]@._' '[:lower:]-')
+          IMAGE_URI="$ECR_REPOSITORY:$IMAGE_TAG"
+          docker build -t $IMAGE_URI . || { echo "Docker build failed"; exit 1; }
+          docker push $IMAGE_URI || { echo "Docker push failed"; exit 1; }
+
+      - name: SSH and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATEKEY }}
+          script: |
+            # Pull image and start container
+            AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} /usr/local/bin/aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY_URL }}
+            IMAGE_TAG="${{ github.event.inputs.user_name }}-${{ github.event.inputs.project_name }}"
+            IMAGE_TAG=$(echo "$IMAGE_TAG" | tr '[:upper:]@._' '[:lower:]-')
+            IMAGE_URI="${{ secrets.ECR_REPOSITORY_URL }}:$IMAGE_TAG"
+            docker pull $IMAGE_URI
+            docker run -d --name $IMAGE_TAG -p ${{ github.event.inputs.host_port }}:${{ github.event.inputs.container_port }} $IMAGE_URI
+
+            # Add Nginx site configuration
+            sudo bash -c "cat > /etc/nginx/sites-available/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }} <<EOF
+            server {
+                listen 80;
+                listen [::]:80;
+                server_name www.$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }} $IMAGE_TAG.${{ secrets.SERVER_DOMAIN }};
+                access_log /var/log/nginx/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }}/access.log;
+                error_log /var/log/nginx/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }}/error.log;
+                location / {
+                    proxy_pass http://0.0.0.0:${{ github.event.inputs.host_port }};
+                }
+            }
+            EOF"
+            sudo ln -s /etc/nginx/sites-available/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }} /etc/nginx/sites-enabled/
+            sudo mkdir -p /var/log/nginx/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }}
+            sudo touch /var/log/nginx/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }}/access.log
+            sudo touch /var/log/nginx/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }}/error.log
+            sudo systemctl restart nginx
+            # Check if NGINX is active
+            if ! systemctl is-active --quiet nginx; then
+              echo "Error: NGINX is not active."
+              exit 1
+            else
+              echo "Success: NGINX is active and running."
+              fi

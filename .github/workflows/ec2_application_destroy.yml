@@ -1,0 +1,43 @@
+name: Destroy App from EC2
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: 'Project Name'
+        required: true
+      user_name:
+        description: 'User Name'
+        required: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and Destroy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATEKEY }}
+          script: |
+            # Docker container cleanup
+            IMAGE_TAG="${{ github.event.inputs.user_name }}-${{ github.event.inputs.project_name }}"
+            IMAGE_TAG=$(echo "$IMAGE_TAG" | tr '[:upper:]@._' '[:lower:]-')
+            IMAGE_URI="${{ secrets.ECR_REPOSITORY_URL }}:$IMAGE_TAG"
+            docker rm -f $IMAGE_TAG
+            docker rmi $IMAGE_URI
+
+            # Nginx configuration cleanup
+            sudo rm /etc/nginx/sites-available/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }}
+            sudo rm /etc/nginx/sites-enabled/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }}
+            sudo rm -rf /var/log/nginx/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }}
+            
+            sudo systemctl restart nginx
+            # Check if NGINX is active
+            if ! systemctl is-active --quiet nginx; then
+              echo "Error: NGINX is not active."
+              exit 1
+            else
+              echo "Success: NGINX is active and running."
+            fi

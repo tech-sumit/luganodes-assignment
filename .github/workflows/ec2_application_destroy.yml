@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  build-and-deploy:
+  destroy-application-ec2:
     runs-on: ubuntu-latest
     steps:
       - name: SSH and Destroy

@@ -23,7 +23,7 @@ on:
         required: false
 
 jobs:
-  build-and-deploy:
+  deploy-application-ec2:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo

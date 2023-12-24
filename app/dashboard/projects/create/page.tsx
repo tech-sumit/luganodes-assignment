@@ -8,16 +8,16 @@ import {
     Button,
     Box,
     Stack,
-    Paper,
     Card,
     CardContent,
     CardHeader,
     Snackbar,
-    SnackbarOrigin, Slide, Alert, AlertColor
+    Alert,
+    AlertColor
 } from '@mui/material';
 import IconButton from "@mui/material/IconButton";
 import {useState} from "react";
-import Typography from "@mui/material/Typography";
+import {useRouter} from "next/navigation";
 
 interface Project {
     project_name: string;
@@ -35,6 +35,8 @@ interface NotificationData {
 }
 
 export default function CreateProjectPage() {
+    const router = useRouter()
+
     const {control, register, handleSubmit, formState: {errors}} = useForm<Project>();
     const {fields, append, remove} = useFieldArray({control, name: 'envs'});
     const repoUrlPattern = /^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/; // Example pattern for "username/repository"
@@ -63,6 +65,7 @@ export default function CreateProjectPage() {
                         message: "Project created",
                         type: "success"
                     })
+                    router.push('/dashboard/projects')
                 }else{
                     console.error('Error in project creation:', data)
                     setNotification({

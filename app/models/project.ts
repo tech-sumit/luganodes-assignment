@@ -37,6 +37,7 @@ export const CreateProjectSchema = Joi.object({
 
 
 export const UpdateProjectSchema = Joi.object({
+    project_name: Joi.string().trim().min(3).max(100).required(),
     description: Joi.string().trim().max(500).allow(null, ''),
     container_port: Joi.number().integer().min(1).max(65535).required(),
     entrypoint: Joi.string().trim().max(500).allow(''),

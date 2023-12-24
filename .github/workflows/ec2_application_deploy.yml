@@ -70,6 +70,7 @@ jobs:
             IMAGE_TAG=$(echo "$IMAGE_TAG" | tr '[:upper:]@._' '[:lower:]-')
             IMAGE_URI="${{ secrets.ECR_REPOSITORY_URL }}:$IMAGE_TAG"
             docker pull $IMAGE_URI
+            docker rm -f $IMAGE_TAG
             docker run -d --name $IMAGE_TAG -p ${{ github.event.inputs.host_port }}:${{ github.event.inputs.container_port }} $IMAGE_URI
 
             # Add Nginx site configuration

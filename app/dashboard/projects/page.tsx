@@ -20,7 +20,9 @@ interface ProjectItem {
 
 function fetchProjects(){
     let projects: ProjectItem[] = [];
-    fetch('/api/projects')
+    fetch('/api/projects',{
+        method: 'GET',
+    })
         .then(response => response.json())
         .then(data => projects=data)
         .catch(error => console.error('Error fetching projects:', error));

@@ -25,39 +25,3 @@
     @apply border-foreground/20;
   }
 }
-
-.dashboard-container {
-  display: flex;
-  height: 100%;
-  width: 100%; /* Added to fill the full width */
-}
-
-.sidebar {
-  width: 250px; /* Adjust width as needed */
-  background-color: #f0f0f0; /* Sidebar background color */
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.main-content {
-  flex-grow: 1; /* Takes remaining space */
-  display: flex;
-  flex-direction: column; /* Stack top-bar and content */
-}
-
-.top-bar {
-  background-color: #ddd; /* Top bar background color */
-  padding: 10px;
-  display: flex;
-  align-items: center; /* Center items vertically */
-}
-
-.content {
-  flex-grow: 1; /* Takes remaining space in main-content */
-  padding: 20px;
-}
-
-.dashboard-container {
-  display: flex;
-  height: 100%;
-}

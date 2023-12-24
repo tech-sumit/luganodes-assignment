@@ -5,6 +5,7 @@ import AssignmentImage from './img_assignment.png'
 import {createClient} from "@/utils/supabase/server";
 import {cookies} from "next/headers";
 import {redirect} from 'next/navigation'
+import Toolbar from "@mui/material/Toolbar";
 
 export default async function Index() {
     const cookieStore = cookies()
@@ -24,18 +25,15 @@ export default async function Index() {
                 </nav>
 
                 <div className="w-full flex-1 flex flex-col px-3">
-                    <main className="flex-1 flex flex-col gap-6 w-full">
-                        <div
-                            className="w-full h-100 flex justify-center">
-                            <Image
-                                className="flex justify-center border-b border-b-foreground/10"
-                                src={AssignmentImage}
-                                width={500}
-                                height={500}
-                                alt="Assignment image"
-                            />
-                        </div>
-                    </main>
+                    <div className="w-full h-100 flex justify-center">
+                        <Image
+                            className="flex justify-center border-b border-b-foreground/10"
+                            src={AssignmentImage}
+                            width={500}
+                            height={500}
+                            alt="Assignment image"
+                        />
+                    </div>
                 </div>
                 <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
                     <p>

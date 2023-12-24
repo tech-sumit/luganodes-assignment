@@ -24,10 +24,15 @@ export const GetProjectSchema = Joi.object({
 export const CreateProjectSchema = Joi.object({
     project_name: Joi.string().trim().min(3).max(100).required(),
     description: Joi.string().trim().max(500).allow(null, ''),
-    repo_url: Joi.string().uri().required(),
+    repo_url: Joi.string().pattern(new RegExp('^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$')).required(),
     container_port: Joi.number().integer().min(1).max(65535).required(),
-    entrypoint: Joi.string().trim().max(500).allow(''),
-    envs: Joi.object().pattern(Joi.string(), Joi.string()).allow(null),
+    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('^\\[\\s*("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\')(,\\s*("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'))*\\s*\\]$')).allow(''),
+    envs: Joi.array().items(
+        Joi.object({
+            key: Joi.string().required(),
+            value: Joi.string().allow('')
+        })
+    ).allow(),
 }).unknown(false);
 
 

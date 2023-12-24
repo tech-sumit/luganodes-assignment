@@ -1,138 +1,212 @@
 'use client'
-import {Button, Form, Input, Rule, Textarea, TYPE} from "shineout";
-import {useCallback, useState} from "react";
+
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import {useFieldArray, useForm} from 'react-hook-form';
+import {
+    TextField,
+    Button,
+    Box,
+    Stack,
+    Paper,
+    Card,
+    CardContent,
+    CardHeader,
+    Snackbar,
+    SnackbarOrigin, Slide, Alert, AlertColor
+} from '@mui/material';
+import IconButton from "@mui/material/IconButton";
+import {useState} from "react";
+import Typography from "@mui/material/Typography";
 
 interface Project {
-    project_name: string
-    description?: string
-    repo_url: string
-    container_port: number
-    entrypoint: string
-    envs: object
+    project_name: string;
+    description?: string;
+    repo_url: string;
+    container_port: number;
+    entrypoint: string;
+    envs: { key: string; value: string }[];
 }
 
-type FormProps = TYPE.Form.Props<Project>
-type FormValue = FormProps['value']
-type FormRef = TYPE.Form.Ref<any>
-type RuleParams = TYPE.Rule.Params
-type RuleFunc = TYPE.Rule.validFunc
-
-interface EnvVariable {
-    key?: string
-    value?: string
+interface NotificationData {
+    visibility: boolean;
+    message: string;
+    type: AlertColor
 }
-
-interface ValueMap {
-    [x: string]: string | boolean
-}
-
-const duplicateCheck: RuleFunc = (values: any, _: any, callback: any) => {
-    const result: any[] = []
-    const valueMap: ValueMap = {}
-    values.forEach(({key}: EnvVariable, i: number) => {
-        if (!key) return
-        if (valueMap[key]) result[i] = {name: new Error(`Cannot have duplicate envs: "${key}" exists.`)}
-        else valueMap[key] = true
-    })
-    callback(result.length > 0 ? result : true)
-}
-
-const rules = Rule({duplicateCheck})
 
 export default function CreateProjectPage() {
-    const [value, setValue] = useState<FormValue>(undefined)
+    const {control, register, handleSubmit, formState: {errors}} = useForm<Project>();
+    const {fields, append, remove} = useFieldArray({control, name: 'envs'});
+    const repoUrlPattern = /^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/; // Example pattern for "username/repository"
+    const entrypointPattern = /^\[\s*("([^"\\]|\\.)*"|'([^'\\]|\\.)*')(,\s*("([^"\\]|\\.)*"|'([^'\\]|\\.)*'))*\s*\]$/;
 
-    const renderEmpty = (onAppend: any) => (
-        <Button key="empty" onClick={() => onAppend({key: ''})}>Add Environment variable</Button>);
+    const [notification, setNotification] = useState<NotificationData>({
+        visibility: false,
+        message: "Creation in progress",
+        type: "info"
+    });
+
+    const onSubmit = (project: Project) => {
+        fetch('/api/projects',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(project),
+        })
+            .then(async response => {
+                let data=await response.json()
+                if (response.status==201){
+                    console.log('Project created:', data)
+                    setNotification({
+                        visibility: true,
+                        message: "Project created",
+                        type: "success"
+                    })
+                }else{
+                    console.error('Error in project creation:', data)
+                    setNotification({
+                        visibility: true,
+                        message: "Project creation failed",
+                        type: "error"
+                    })
+                }
+            })
+            .catch(error => {
+                console.log('API ERROR:', error)
+                setNotification({
+                    visibility: true,
+                    message: error,
+                    type: "error"
+                })
+            });
+    };
 
     return (
         <div>
-            <Form
-                value={value}
-                scrollToError={30}
-                onChange={setValue}
-                style={{maxWidth: 500}}
-                onSubmit={callCreateProjectAPI}
-            >
-                <Form.Item required label="Project name">
-                    <Input
-                        name="project_name"
-                        title="Project name"
-                        rules={[rules.required, rules.range(3, 100)]}/>
-                </Form.Item>
+            <Card variant="outlined" sx={{marginX: 10, marginY: 5}}>
+                <CardHeader title="New project"/>
+                <CardContent>
+                    <form onSubmit={handleSubmit(onSubmit)}>
 
-                <Form.Item label="Description">
-                    <Textarea name="description" autosize/>
-                </Form.Item>
+                        <Stack spacing={2} sx={{width: '100%'}}>
+                            <TextField
+                                {...register("project_name", {
+                                    required: "Project name is required",
+                                    minLength: {value: 3, message: "Minimum length is 3"}
+                                })}
+                                label="Project name"
+                                error={!!errors.project_name}
+                                size="small"
+                                helperText={errors.project_name?.message}
+                            />
 
-                <Form.Item required label="Github repository path">
-                    <Input
-                        name="repo_url"
-                        placeholder="facebook/react"
-                        rules={[rules.required, rules.range(3, 100)]}/>
-                </Form.Item>
+                            <TextField
+                                {...register("description")}
+                                label="Description"
+                                multiline
+                                size="small"
+                                rows={4}
+                            />
 
-                <Form.Item required label="Container port">
-                    <Input.Number
-                        name="container_port"
-                        placeholder="1024-65535"
-                        max={65535} min={1024}
-                        rules={[rules.required]}/>
-                </Form.Item>
+                            <TextField
+                                {...register("repo_url", {
+                                    required: "Repository is required in 'owner/repository' format",
+                                    pattern: {
+                                        value: repoUrlPattern,
+                                        message: "Invalid repository format"
+                                    }
+                                })}
+                                label="Github repository path"
+                                placeholder="facebook/react"
+                                error={!!errors.repo_url}
+                                size="small"
+                                helperText={errors.repo_url?.message}
+                            />
 
-                <Form.Item required label="Entrypoint">
-                    <Input
-                        name="entrypoint"
-                        placeholder='["node","index.js"] (Optional)'
-                        max={65535} min={1024}
-                        rules={[rules.required]}/>
-                </Form.Item>
+                            <TextField
+                                {...register("container_port", {
+                                    required: "Container port is required, range: 1024-65535",
+                                    valueAsNumber: true,
+                                    min: {value: 1024, message: "Minimum port is 1024"},
+                                    max: {value: 65535, message: "Maximum port is 65535"}
+                                })}
+                                label="Container port"
+                                placeholder="1024-65535"
+                                type="number"
+                                fullWidth
+                                size="small"
+                                error={!!errors.container_port}
+                                helperText={errors.container_port?.message}
+                            />
 
-                <Form.Item label="Friends">
-                    <Form.FieldSet
-                        name="friends"
-                        empty={renderEmpty}
-                        rules={[rules.duplicateCheck]}
-                        defaultValue={[]}
-                    >
-                        {({onAppend, onRemove}) => (
-                            <Form.Item style={{display: 'flex', alignItems: 'center', marginBottom: 12}}>
-                                <Input
-                                    name="key"
-                                    placeholder="Key"
-                                    title="Key"
-                                    rules={[rules.required]}
-                                    style={{width: 180, marginInlineEnd: 8}}
-                                />
-                                <Input
-                                    name="value"
-                                    placeholder="Age"
-                                    title="Value"
-                                    rules={[rules.required]}
-                                    style={{width: 180, marginInlineEnd: 8}}
-                                />
-                                <a style={{margin: '0 12px'}} onClick={() => onAppend({key: "", value: ""})}>
-                                    <AddIcon/>
-                                </a>
-                                <a onClick={onRemove}>
-                                    <CloseIcon/>
-                                </a>
-                            </Form.Item>
-                        )}
-                    </Form.FieldSet>
-                </Form.Item>
+                            <TextField
+                                {...register("entrypoint", {
+                                    pattern: {
+                                        value: entrypointPattern,
+                                        message: "Entrypoint must be a valid JSON array"
+                                    }
+                                })}
+                                label="Entrypoint"
+                                size="small"
+                                placeholder='["node","index.js"] (Optional)'
+                                error={!!errors.entrypoint}
+                                helperText={errors.entrypoint?.message}
+                            />
 
-                <Form.Item label="">
-                    <Form.Submit>Submit</Form.Submit>
-                    <Form.Reset>Reset</Form.Reset>
-                </Form.Item>
-            </Form>
+                            {fields.map((item, index) => (
+                                <Box key={item.id} sx={{width: '100%'}}>
+                                    <Stack direction="row" spacing={1} alignItems="center" sx={{width: '100%'}}>
+                                        <TextField
+                                            label="Key"
+                                            placeholder="Key"
+                                            fullWidth
+                                            size="small"
+                                            {...register(`envs.${index}.key`)}
+                                        />
+                                        <TextField
+                                            label="Value"
+                                            placeholder="Value"
+                                            fullWidth
+                                            size="small"
+                                            {...register(`envs.${index}.value`)}
+                                        />
+                                        <IconButton
+                                            color="secondary"
+                                            aria-label="Remove"
+                                            onClick={() => remove(index)}>
+                                            <CloseIcon/>
+                                        </IconButton>
+                                        <IconButton
+                                            color="primary"
+                                            aria-label="Add"
+                                            onClick={() => append({key: '', value: ''})}>
+                                            <AddIcon/>
+                                        </IconButton>
+                                    </Stack>
+                                </Box>
+                            ))}
+                            <Button variant="outlined"
+                                    endIcon={<AddIcon/>}
+                                    color="primary"
+                                    aria-label="Add"
+                                    onClick={() => append({key: '', value: ''})}>
+                                Add Environment variable
+                            </Button>
+
+                            <Button variant="outlined" type="submit">Submit</Button>
+                        </Stack>
+                    </form>
+                </CardContent>
+            </Card>
+            <Snackbar
+                anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                open={notification.visibility}
+                onClose={() => setNotification({...notification, visibility: false})}>
+                <Alert severity={notification.type} sx={{ width: '100%' }}>
+                    {notification.message}
+                </Alert>
+            </Snackbar>
         </div>
-    )
-}
-
-function callCreateProjectAPI(project:Project) {
-
+    );
 }

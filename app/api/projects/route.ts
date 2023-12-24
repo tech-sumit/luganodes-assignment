@@ -1,18 +1,19 @@
-// This file handles GET requests to /api/projects/[id]
 import {createClient} from '@/utils/supabase/server';
 import {cookies} from "next/headers";
-import {NextApiRequest, NextApiResponse} from "next";
-import {NextResponse} from "next/server";
 import {CreateProjectSchema, GetProjectSchema} from "@/app/models/project";
+import {NextRequest, NextResponse} from "next/server";
+
+import type {Database} from '@/lib/database.types'
 
 export const dynamic = 'force-dynamic' // defaults to auto
 
-export async function GET(req: NextApiRequest) {
-    console.log(req.query)
+export async function GET(req: NextRequest) {
+    console.log(req.nextUrl.searchParams)
     const cookieStore = cookies()
     const supabase = createClient(cookieStore);
+    const {data: {session}} = await supabase.auth.getSession()
 
-    const {data} = await supabase.from("projects").select();
+    const {data} = await supabase.from("projects").select().eq('user_id',session?.user.id);
 
     return NextResponse.json(
         {message: 'Projects fetched', data: GetProjectSchema.validate(data).value},
@@ -20,20 +21,26 @@ export async function GET(req: NextApiRequest) {
     )
 }
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: Request) {
     // Authenticate session
     const cookieStore = cookies()
     const supabase = createClient(cookieStore);
+    const {data: {session}} = await supabase.auth.getSession()
+
+    const body = await req.json()
 
     // Validate request
-    let {error: validationError, value: project} = CreateProjectSchema.validate(req.body)
+    let {error: validationError, value: project} = CreateProjectSchema.validate(body)
     if (validationError) {
         return NextResponse.json({error: validationError}, {status: 400})
     }
 
+    //Set user_id being authenticated user
+    project.user_id=session?.user.id
+
     // Add a new project
     const {data: newProject, error: dbError} = await supabase.from("projects")
-        .insert([project])
+        .insert(project)
         .select();
 
     if (dbError) {

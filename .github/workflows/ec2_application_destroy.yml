@@ -6,9 +6,6 @@ on:
       project_name:
         description: 'Project Name'
         required: true
-      user_name:
-        description: 'User Name'
-        required: true
 
 jobs:
   destroy-application-ec2:
@@ -22,8 +19,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATEKEY }}
           script: |
             # Docker container cleanup
-            IMAGE_TAG="${{ github.event.inputs.user_name }}-${{ github.event.inputs.project_name }}"
-            IMAGE_TAG=$(echo "$IMAGE_TAG" | tr '[:upper:]@._' '[:lower:]-')
+            IMAGE_TAG=$(echo "${{ github.event.inputs.project_name }}" | tr '[:upper:]@._' '[:lower:]-')
             IMAGE_URI="${{ secrets.ECR_REPOSITORY_URL }}:$IMAGE_TAG"
             docker rm -f $IMAGE_TAG
             docker rmi $IMAGE_URI

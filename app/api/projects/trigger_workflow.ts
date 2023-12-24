@@ -1,34 +1,68 @@
-import { Octokit } from "@octokit/core";
+import {Octokit} from "@octokit/core";
 
-async function triggerWorkflowDispatch() {
-    const octokit = new Octokit({ auth: "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" });
+type DeployWorkflowInput = {
+    repo_url: string
+    project_name: string
+    host_port: string
+    container_port: string
+    entrypoint_array: string
+}
 
-    const owner = "tech-sumit";
-    const repo = "luganodes-assignment";
-    const workflow_id = "ec2_application_deploy.yml"
-    const ref = "main"; // e.g., "main"
+type DestroyWorkflowInput = {
+    project_name: string
+}
 
-    const inputs = {
-        repo_url: "tech-sumit/luganodes-assignment",
-        project_name: "luganodes-assignment",
-        user_name: "tech-sumit",
-        random_host_port: "8080",
-        container_port: "3000",
-        // Add other inputs as needed
-    };
+enum Workflows {
+    Deploy = ".github/workflows/ec2_application_deploy.yml",
+    Destroy = ".github/workflows/ec2_application_destroy.yml"
+}
 
+type TriggerResponse = Promise<{
+    isSuccess: boolean
+    message: string
+    error?: string
+}>;
+
+async function triggerWorkflowDispatch(token: string, owner: string, repo: string, workflow_name: Workflows, branch: string, inputs: DeployWorkflowInput | DestroyWorkflowInput): TriggerResponse {
+    const octokit = new Octokit({auth: token});
+    const url = 'POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches'
     try {
-        await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+        let response = await octokit.request(url, {
             owner,
             repo,
-            workflow_id,
-            ref,
+            workflow_id: workflow_name,
+            ref: branch,
             inputs
         });
         console.log('Workflow dispatch triggered successfully.');
+        if (response.status == 204) {
+            return {isSuccess: true, message: 'Workflow dispatched successfully.'};
+        } else {
+            return {isSuccess: false, message: 'Workflow dispatch unsuccessful.'};
+        }
     } catch (error) {
-        console.error('Error triggering workflow:', error);
+        return {isSuccess: false, message: 'Workflow dispatch unsuccessful.', error: "" + error};
     }
 }
 
-triggerWorkflowDispatch();
+class TriggerWorkflow {
+    token: string;
+    owner: string;
+    repo: string;
+    branch: string;
+
+    constructor(token: string, owner: string, repo: string, branch: string = "main") {
+        this.token = token;
+        this.owner = owner;
+        this.repo = repo;
+        this.branch = branch;
+    }
+
+    async deploy(input: DeployWorkflowInput) {
+        return triggerWorkflowDispatch(this.token, this.owner, this.repo, Workflows.Deploy, this.branch, input)
+    }
+
+    async destroy(input: DestroyWorkflowInput) {
+        return triggerWorkflowDispatch(this.token, this.owner, this.repo, Workflows.Destroy, this.branch, input)
+    }
+}

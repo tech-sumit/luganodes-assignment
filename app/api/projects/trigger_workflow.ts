@@ -1,17 +1,17 @@
 import { Octokit } from "@octokit/core";
 
 async function triggerWorkflowDispatch() {
-    const octokit = new Octokit({ auth: "<your_github_token>" });
+    const octokit = new Octokit({ auth: "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" });
 
-    const owner = "<your_github_username_or_org>";
-    const repo = "<your_repository_name>";
-    const workflow_id = "<workflow_file_name.yml>"; // e.g., "deploy.yml"
-    const ref = "<branch>"; // e.g., "main"
+    const owner = "tech-sumit";
+    const repo = "luganodes-assignment";
+    const workflow_id = "ec2_application_deploy.yml"
+    const ref = "main"; // e.g., "main"
 
     const inputs = {
-        repo_url: "https://github.com/example/repo",
-        project_name: "example_project",
-        user_name: "example_user",
+        repo_url: "tech-sumit/luganodes-assignment",
+        project_name: "luganodes-assignment",
+        user_name: "tech-sumit",
         random_host_port: "8080",
         container_port: "3000",
         // Add other inputs as needed

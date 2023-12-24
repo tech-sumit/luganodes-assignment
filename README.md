@@ -5,6 +5,12 @@
 
 Sample Docker file to be added and the deployment workflow
 
+Use this repo to test deploy with Dockerfile present case
+https://github.com/Shaharyar07/Dummy-Server-Node-Express
+
+Use this repo to test deploy without Dockerfile present case
+https://github.com/heroku/node-js-sample
+
 ## Workflow requirements
 Workflow's dynamic inputs
 ```yaml

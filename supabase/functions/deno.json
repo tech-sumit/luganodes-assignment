@@ -1,0 +1,7 @@
+{
+  "importMap": "./import_map.json",
+  "tasks": {
+    "dev": "deno run --watch github-workflow-webhook/index.ts",
+    "index": "deno run --allow-net --allow-read github-workflow-webhook/index.ts"
+  }
+}

@@ -34,7 +34,7 @@ interface NotificationData {
     type: AlertColor
 }
 
-export default function CreateProjectPage() {
+export default function LogsPage() {
     const router = useRouter()
 
     const {control, register, handleSubmit, formState: {errors}} = useForm<Project>();

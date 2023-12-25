@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "supabase-js": "https://esm.sh/@supabase/supabase-js@2.24.0",
+    "dotenv": "https://deno.land/std@0.210.0/dotenv/mod.ts"
+  }
+}

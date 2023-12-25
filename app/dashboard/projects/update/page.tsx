@@ -16,8 +16,9 @@ import {
     AlertColor
 } from '@mui/material';
 import IconButton from "@mui/material/IconButton";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
+import {useRouter, useSearchParams} from "next/navigation";
+import {setProjectByName} from "@/app/dashboard/network";
 
 interface Project {
     project_name: string;
@@ -34,43 +35,74 @@ interface NotificationData {
     type: AlertColor
 }
 
-export default function CreateProjectPage() {
-    const router = useRouter()
+const repoUrlPattern = /^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/; // Example pattern for "username/repository"
+const entrypointPattern = /^\[\s*("([^"\\]|\\.)*"|'([^'\\]|\\.)*')(,\s*("([^"\\]|\\.)*"|'([^'\\]|\\.)*'))*\s*\]$/;
 
-    const {control, register, handleSubmit, formState: {errors}} = useForm<Project>();
-    const {fields, append, remove} = useFieldArray({control, name: 'envs'});
-    const repoUrlPattern = /^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/; // Example pattern for "username/repository"
-    const entrypointPattern = /^\[\s*("([^"\\]|\\.)*"|'([^'\\]|\\.)*')(,\s*("([^"\\]|\\.)*"|'([^'\\]|\\.)*'))*\s*\]$/;
+export default function UpdateProjectPage() {
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    let projectName= `${searchParams.get('project_name')}`
+    const {
+        control,
+        register,
+        handleSubmit,
+        formState: {errors},
+        reset,
+    } = useForm<Project>({
+        defaultValues:{
+            project_name:projectName,
+            description:'LOADING',
+            repo_url:'LOADING',
+            container_port:0,
+            entrypoint:'LOADING',
+            envs:[],
+        }
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await setProjectByName(projectName, reset)
+        };
+
+        fetchData();
+    }, [reset]);
+
+    const {
+        fields,
+        append,
+        remove
+    } = useFieldArray({control, name: 'envs'});
+
 
     const [notification, setNotification] = useState<NotificationData>({
         visibility: false,
-        message: "Creation in progress",
+        message: "Updating project",
         type: "info"
     });
 
     const onSubmit = (project: Project) => {
-        fetch('/api/projects',{
-            method: 'POST',
-            headers:{
+        fetch('/api/projects', {
+            method: 'PUT',
+            headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(project),
         })
             .then(async response => {
-                let data=await response.json()
-                if (response.status==201){
-                    console.log('Project created:', data)
+                let data = await response.json()
+                if (response.status == 201) {
+                    console.log('Project updated:', data)
                     setNotification({
                         visibility: true,
-                        message: "Project created",
+                        message: "Project updated",
                         type: "success"
                     })
                     router.replace('/dashboard/projects')
-                }else{
-                    console.error('Error in project creation:', data)
+                } else {
+                    console.error('Error while updating project:', data)
                     setNotification({
                         visibility: true,
-                        message: "Project creation failed",
+                        message: "Project updating failed",
                         type: "error"
                     })
                 }
@@ -88,7 +120,7 @@ export default function CreateProjectPage() {
     return (
         <div>
             <Card variant="outlined" sx={{marginX: 10, marginY: 5}}>
-                <CardHeader title="New project"/>
+                <CardHeader title="Update project"/>
                 <CardContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -98,6 +130,7 @@ export default function CreateProjectPage() {
                                     required: "Project name is required",
                                     minLength: {value: 3, message: "Minimum length is 3"}
                                 })}
+                                disabled
                                 label="Project name"
                                 error={!!errors.project_name}
                                 size="small"
@@ -207,7 +240,7 @@ export default function CreateProjectPage() {
                 anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                 open={notification.visibility}
                 onClose={() => setNotification({...notification, visibility: false})}>
-                <Alert severity={notification.type} sx={{ width: '100%' }}>
+                <Alert severity={notification.type} sx={{width: '100%'}}>
                     {notification.message}
                 </Alert>
             </Snackbar>

@@ -43,13 +43,16 @@ export default function ProjectsPage() {
             title: 'Deployment state',
             field: 'deployment_state',
             lookup: {
-                'PROJECT_CREATED': 'Project created',
-                'DEPLOY_TRIGGERED': 'Deployment triggered',
-                'DEPLOY_ERROR': 'Error while deploying application',
-                'DEPLOY_SUCCESS': 'Deployment successful',
-                'DESTROY_TRIGGERED': 'Destroy triggered',
-                'DESTROY_ERROR': 'Error while destroying application',
-                'DESTROY_SUCCESS': 'Destroy successful',
+                'PROJECT_CREATED':'Project created',
+                'DEPLOY_PENDING':'Deployment pending',
+                'DESTROY_PENDING':'Destroy pending',
+                'DEPLOYING':'Deployment in progress',
+                'DEPLOYED':'Deployment successful',
+                'DEPLOY_FAILED':'Error while deploying application',
+                'DESTROYING':'Destroy in progress',
+                'DESTROYED':'Destroy successful',
+                'DESTROY_FAILED':'Error while destroying application',
+                'UNKNOWN':'Contact support'
             },
             type: 'string'
         },

@@ -83,6 +83,7 @@ jobs:
             DOCKER_RUN_CMD="$DOCKER_RUN_CMD $IMAGE_URI"
 
             # Execute the Docker run command
+            echo $DOCKER_RUN_CMD
             eval $DOCKER_RUN_CMD
           
             # Add Nginx site configuration

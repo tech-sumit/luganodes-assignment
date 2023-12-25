@@ -5,7 +5,7 @@ type DeployWorkflowInput = {
     project_name: string
     host_port: string
     container_port: string
-    entrypoint_array: string
+    entrypoint: string
 }
 
 type DestroyWorkflowInput = {
@@ -49,11 +49,13 @@ export default class TriggerWorkflow {
     token: string;
     owner: string;
     repo: string;
+    branch?: string
 
-    constructor(token: string, owner: string, repo: string) {
+    constructor(token: string, owner: string, repo: string, branch: string = "main") {
         this.token = token;
         this.owner = owner;
         this.repo = repo;
+        this.branch=branch
     }
 
     async deploy(input: DeployWorkflowInput) {
@@ -71,7 +73,7 @@ export default class TriggerWorkflow {
         const {data: refData} = await octokit.request('GET /repos/{owner}/{repo}/git/ref/heads/{branch}', {
             owner: this.owner,
             repo: this.repo,
-            branch: input.project_name
+            branch: this.branch
         });
         const sha = refData.object.sha;
 
@@ -105,7 +107,7 @@ export default class TriggerWorkflow {
             console.log(`Branch '${project_name}' deleted successfully`);
             return {isSuccess: true, message: `Branch '${project_name}' deleted successfully`};
         } else {
-            return {isSuccess: false, message: 'Branch deletion unsuccessful.',error: JSON.stringify(response.data)};
+            return {isSuccess: false, message: 'Branch deletion unsuccessful.', error: JSON.stringify(response.data)};
         }
     }
 
@@ -128,14 +130,14 @@ export default class TriggerWorkflow {
     // Function to delete a branch and trigger destroy
     async deleteAndDestroy(input: DestroyWorkflowInput): TriggerResponse {
         try {
-            // Delete the branch
-            const deleteBranchResponse = await this.deleteBranch(input.project_name);
-            if (!deleteBranchResponse.isSuccess) {
-                return deleteBranchResponse;
+            // Destroy
+            const destroyResponse=await this.destroy(input);
+            if (!destroyResponse.isSuccess){
+                return destroyResponse;
             }
 
-            // Destroy
-            return this.destroy(input);
+            // Delete the branch
+            return await this.deleteBranch(input.project_name);
         } catch (error) {
             return {isSuccess: false, message: 'Error in delete and destroy', error: "" + error};
         }

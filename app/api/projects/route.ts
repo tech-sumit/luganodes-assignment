@@ -3,11 +3,11 @@ import {cookies} from "next/headers";
 import {CreateProjectSchema, DeleteProjectSchema, GetProjectSchema, UpdateProjectSchema} from "@/app/models/project";
 import {NextRequest, NextResponse} from "next/server";
 import TriggerWorkflow from "@/app/api/projects/trigger_workflow";
-import {Project} from "next/dist/build/swc";
 
 if (!process.env.GITHUB_TOKEN
     || !process.env.REPO_OWNER
     || !process.env.REPO_NAME
+    || !process.env.DEFAULT_BRANCH
 ) {
     console.log("Environment variables missing to initialise Github integration. shutting down server.")
     process.exit(1)
@@ -86,9 +86,9 @@ export async function POST(req: Request) {
 
     // Trigger workflow
     const triggerResponse = await trigger.createAndDeploy({
-        container_port: projectToTrigger.container_port,
-        entrypoint_array: projectToTrigger.entrypoint_array,
-        host_port: projectToTrigger.host_port,
+        container_port: `${projectToTrigger.container_port}`,
+        entrypoint: JSON.stringify(projectToTrigger.entrypoint),
+        host_port: `${projectToTrigger.host_port}`,
         project_name: projectToTrigger.project_name,
         repo_url: projectToTrigger.repo_url
     })
@@ -133,13 +133,13 @@ export async function PUT(req: Request) {
         .update({
             description: project.description,
             repo_url: project.repo_url,
-            container_port: project.container_port,
+            container_port: `${project.container_port}`,
             entrypoint: project.entrypoint,
             envs: project.envs
         })
         .eq('user_id', project.user_id)
         .eq('project_name', project.project_name)
-        .select().limit(1);
+        .select();
 
     if (dbError) {
         console.error('Error updating project:', dbError);
@@ -153,9 +153,9 @@ export async function PUT(req: Request) {
 
     // Trigger redeploy workflow
     const triggerResponse = await trigger.deploy({
-        container_port: projectToTrigger.container_port,
-        entrypoint_array: projectToTrigger.entrypoint_array,
-        host_port: projectToTrigger.host_port,
+        container_port: `${projectToTrigger.container_port}`,
+        entrypoint: projectToTrigger.entrypoint,
+        host_port: `${projectToTrigger.host_port}`,
         project_name: projectToTrigger.project_name,
         repo_url: projectToTrigger.repo_url
     })

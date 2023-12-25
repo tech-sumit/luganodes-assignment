@@ -15,7 +15,7 @@ on:
       container_port:
         description: 'Container Port'
         required: true
-      entrypoint_array:
+      entrypoint:
         description: 'Entrypoint Array (JSON format)'
         required: false
 
@@ -42,10 +42,10 @@ jobs:
         env:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_URL }}
           PROJECT_NAME: ${{ github.event.inputs.project_name }}
-          ENTRYPOINT_ARRAY: ${{ github.event.inputs.entrypoint_array }}
+          ENTRYPOINT: ${{ github.event.inputs.entrypoint }}
         run: |
           if [ ! -f Dockerfile ]; then
-            printf "FROM node:slim\nRUN apt-get update && apt-get install -y curl ca-certificates && rm -rf /var/lib/apt/lists/*\nWORKDIR /code\nCOPY . /code\nRUN npm install --force\nENTRYPOINT $ENTRYPOINT_ARRAY\n" > Dockerfile || { echo "Dockerfile creation failed"; exit 1; }
+            printf "FROM node:slim\nRUN apt-get update && apt-get install -y curl ca-certificates && rm -rf /var/lib/apt/lists/*\nWORKDIR /code\nCOPY . /code\nRUN npm install --force\nENTRYPOINT $ENTRYPOINT\n" > Dockerfile || { echo "Dockerfile creation failed"; exit 1; }
           fi
           IMAGE_TAG=$(echo "${{ github.event.inputs.project_name }}" | tr '[:upper:]@._' '[:lower:]-')
           IMAGE_URI="$ECR_REPOSITORY:$IMAGE_TAG"

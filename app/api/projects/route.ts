@@ -216,7 +216,7 @@ export async function DELETE(req: Request) {
     let projectToTrigger = GetProjectSchema.validate(deletedProject).value
 
     // Trigger delete branch and destroy infra workflow
-    const triggerResponse = await trigger.deleteAndDestroy({
+    const triggerResponse = await trigger.destroy({
         project_name: projectToTrigger.project_name,
     })
 

@@ -52,18 +52,6 @@ interface UpdateProjectItem {
     envs: { key: string; value: string }[];
 }
 
-// export const setProjectByName = async (projectName:string, setDefaultState: React.Dispatch<React.SetStateAction<UpdateProjectItem>>) => {
-//     await fetch('/api/projects?project_name='+projectName, {
-//         method: 'GET',
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             setDefaultState(data.data)
-//             console.log('Default project loaded: ',data.data)
-//         })
-//         .catch(error => console.error('Error fetching projects:', error));
-// }
-//
 export const setProjectByName = async (projectName: string, reset: (values?: (DefaultValues<Project> | ResetAction<Project> | Project), keepStateOptions?: KeepStateOptions) => void) => {
     await fetch('/api/projects?project_name='+projectName, {
         method: 'GET',

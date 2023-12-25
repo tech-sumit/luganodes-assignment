@@ -49,21 +49,19 @@ export default class TriggerWorkflow {
     token: string;
     owner: string;
     repo: string;
-    branch: string;
 
-    constructor(token: string, owner: string, repo: string, branch: string = "main") {
+    constructor(token: string, owner: string, repo: string) {
         this.token = token;
         this.owner = owner;
         this.repo = repo;
-        this.branch = branch;
     }
 
     async deploy(input: DeployWorkflowInput) {
-        return triggerWorkflowDispatch(this.token, this.owner, this.repo, Workflows.Deploy, this.branch, input)
+        return triggerWorkflowDispatch(this.token, this.owner, this.repo, Workflows.Deploy, input.project_name, input)
     }
 
     async destroy(input: DestroyWorkflowInput) {
-        return triggerWorkflowDispatch(this.token, this.owner, this.repo, Workflows.Destroy, this.branch, input)
+        return triggerWorkflowDispatch(this.token, this.owner, this.repo, Workflows.Destroy, input.project_name, input)
     }
 
     async createBranch(input: CreateBranchInput): TriggerResponse {
@@ -73,7 +71,7 @@ export default class TriggerWorkflow {
         const {data: refData} = await octokit.request('GET /repos/{owner}/{repo}/git/ref/heads/{branch}', {
             owner: this.owner,
             repo: this.repo,
-            branch: this.branch
+            branch: input.project_name
         });
         const sha = refData.object.sha;
 
@@ -94,18 +92,18 @@ export default class TriggerWorkflow {
         }
     }
 
-    async deleteBranch(branchName: string): TriggerResponse {
+    async deleteBranch(project_name: string): TriggerResponse {
         const octokit = new Octokit({auth: this.token});
         // SUCCESS code 204
         const response = await octokit.request('DELETE /repos/{owner}/{repo}/git/refs/heads/{branch}', {
             owner: this.owner,
             repo: this.repo,
-            branch: branchName
+            branch: project_name
         });
 
         if (response.status == 204) {
-            console.log(`Branch '${branchName}' deleted successfully`);
-            return {isSuccess: true, message: `Branch '${branchName}' deleted successfully`};
+            console.log(`Branch '${project_name}' deleted successfully`);
+            return {isSuccess: true, message: `Branch '${project_name}' deleted successfully`};
         } else {
             return {isSuccess: false, message: 'Branch deletion unsuccessful.',error: JSON.stringify(response.data)};
         }

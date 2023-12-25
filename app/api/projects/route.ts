@@ -8,7 +8,6 @@ import {Project} from "next/dist/build/swc";
 if (!process.env.GITHUB_TOKEN
     || !process.env.REPO_OWNER
     || !process.env.REPO_NAME
-    || !process.env.DEFAULT_BRANCH
 ) {
     console.log("Environment variables missing to initialise Github integration. shutting down server.")
     process.exit(1)
@@ -17,8 +16,7 @@ if (!process.env.GITHUB_TOKEN
 const trigger = new TriggerWorkflow(
     process.env.GITHUB_TOKEN,
     process.env.REPO_OWNER,
-    process.env.REPO_NAME,
-    process.env.DEFAULT_BRANCH
+    process.env.REPO_NAME
 )
 
 export const dynamic = 'force-dynamic' // defaults to auto

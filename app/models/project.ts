@@ -6,7 +6,7 @@ export const GetProjectSchema = Joi.object({
     repo_url: Joi.string().pattern(new RegExp('^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$')).required(),
     host_port: Joi.number().integer().min(1024).max(65535).allow(null),
     container_port: Joi.number().integer().min(1).max(65535).required(),
-    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('^\\[\\s*("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\')(,\\s*("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'))*\\s*\\]$')).allow(''),
+    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('/^\\[\\s*("([^"\\\\]|\\\\.)*")(,\\s*("([^"\\\\]|\\\\.)*"))*\\s*\\]$/')).allow(''),
     envs: Joi.array().items(
         Joi.object({
             key: Joi.string().required(),
@@ -31,7 +31,7 @@ export const CreateProjectSchema = Joi.object({
     description: Joi.string().trim().max(500).allow(null, ''),
     repo_url: Joi.string().pattern(new RegExp('^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$')).required(),
     container_port: Joi.number().integer().min(1).max(65535).required(),
-    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('^\\[\\s*("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\')(,\\s*("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'))*\\s*\\]$')).allow(''),
+    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('/^\\[\\s*("([^"\\\\]|\\\\.)*")(,\\s*("([^"\\\\]|\\\\.)*"))*\\s*\\]$/')).allow(''),
     envs: Joi.array().items(
         Joi.object({
             key: Joi.string().required(),
@@ -40,13 +40,12 @@ export const CreateProjectSchema = Joi.object({
     ).allow(),
 }).unknown(false);
 
-
 export const UpdateProjectSchema = Joi.object({
     project_name: Joi.string().trim().min(3).max(100).required(),
     description: Joi.string().trim().max(500).allow(null, ''),
     repo_url: Joi.string().pattern(new RegExp('^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$')).required(),
     container_port: Joi.number().integer().min(1).max(65535).required(),
-    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('^\\[\\s*("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\')(,\\s*("([^"\\\\]|\\\\.)*"|\'([^\'\\\\]|\\\\.)*\'))*\\s*\\]$')).allow(''),
+    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('/^\\[\\s*("([^"\\\\]|\\\\.)*")(,\\s*("([^"\\\\]|\\\\.)*"))*\\s*\\]$/')).allow(''),
     envs: Joi.array().items(
         Joi.object({
             key: Joi.string().required(),

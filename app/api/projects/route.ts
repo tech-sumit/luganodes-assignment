@@ -87,7 +87,7 @@ export async function POST(req: Request) {
     // Trigger workflow
     const triggerResponse = await trigger.createAndDeploy({
         container_port: `${projectToTrigger.container_port}`,
-        entrypoint: JSON.stringify(projectToTrigger.entrypoint),
+        entrypoint: projectToTrigger.entrypoint,
         host_port: `${projectToTrigger.host_port}`,
         project_name: projectToTrigger.project_name,
         repo_url: projectToTrigger.repo_url

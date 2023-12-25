@@ -40,7 +40,7 @@ export default function CreateProjectPage() {
     const {control, register, handleSubmit, formState: {errors}} = useForm<Project>();
     const {fields, append, remove} = useFieldArray({control, name: 'envs'});
     const repoUrlPattern = /^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/; // Example pattern for "username/repository"
-    const entrypointPattern = /^\[\s*("([^"\\]|\\.)*"|'([^'\\]|\\.)*')(,\s*("([^"\\]|\\.)*"|'([^'\\]|\\.)*'))*\s*\]$/;
+    const entrypointPattern = /^\[\s*("([^"\\]|\\.)*")(,\s*("([^"\\]|\\.)*"))*\s*\]$/;
 
     const [notification, setNotification] = useState<NotificationData>({
         visibility: false,

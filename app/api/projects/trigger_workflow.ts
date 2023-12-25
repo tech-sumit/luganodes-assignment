@@ -6,6 +6,7 @@ type DeployWorkflowInput = {
     host_port: string
     container_port: string
     entrypoint: string
+    envs: object[]
 }
 
 type DestroyWorkflowInput = {
@@ -28,6 +29,8 @@ type TriggerResponse = Promise<{
 }>;
 
 async function triggerWorkflowDispatch(token: string, owner: string, repo: string, workflow_name: Workflows, branch: string, inputs: DeployWorkflowInput | DestroyWorkflowInput): TriggerResponse {
+    console.log(JSON.stringify(inputs, null, 2))
+
     const octokit = new Octokit({auth: token});
     const url = 'POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches'
     const response = await octokit.request(url, {
@@ -37,6 +40,8 @@ async function triggerWorkflowDispatch(token: string, owner: string, repo: strin
         ref: branch,
         inputs
     });
+
+    console.log(JSON.stringify(response, null, 2))
 
     if (response.status == 204) {
         return {isSuccess: true, message: `Workflow ${workflow_name} dispatched successfully.`};
@@ -55,7 +60,7 @@ export default class TriggerWorkflow {
         this.token = token;
         this.owner = owner;
         this.repo = repo;
-        this.branch=branch
+        this.branch = branch
     }
 
     async deploy(input: DeployWorkflowInput) {
@@ -131,8 +136,8 @@ export default class TriggerWorkflow {
     async deleteAndDestroy(input: DestroyWorkflowInput): TriggerResponse {
         try {
             // Destroy
-            const destroyResponse=await this.destroy(input);
-            if (!destroyResponse.isSuccess){
+            const destroyResponse = await this.destroy(input);
+            if (!destroyResponse.isSuccess) {
                 return destroyResponse;
             }
 

@@ -89,7 +89,8 @@ export async function POST(req: Request) {
         entrypoint: projectToTrigger.entrypoint,
         host_port: `${projectToTrigger.host_port}`,
         project_name: projectToTrigger.project_name,
-        repo_url: projectToTrigger.repo_url
+        repo_url: projectToTrigger.repo_url,
+        envs: projectToTrigger.envs
     })
 
     if (!triggerResponse.isSuccess) {
@@ -156,7 +157,8 @@ export async function PUT(req: Request) {
         entrypoint: projectToTrigger.entrypoint,
         host_port: `${projectToTrigger.host_port}`,
         project_name: projectToTrigger.project_name,
-        repo_url: projectToTrigger.repo_url
+        repo_url: projectToTrigger.repo_url,
+        envs: projectToTrigger.envs
     })
 
     if (!triggerResponse.isSuccess) {

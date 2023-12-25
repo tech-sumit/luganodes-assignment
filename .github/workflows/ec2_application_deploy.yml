@@ -18,6 +18,9 @@ on:
       entrypoint:
         description: 'Entrypoint Array (JSON format)'
         required: false
+      envs:
+        description: 'Environment variables'
+        required: false
 
 jobs:
   deploy-application-ec2:
@@ -52,6 +55,15 @@ jobs:
           docker build -t $IMAGE_URI . || { echo "Docker build failed"; exit 1; }
           docker push $IMAGE_URI || { echo "Docker push failed"; exit 1; }
 
+      - name: Convert JSON to Docker Env Variables
+        id: convert_env
+        run: |
+          if [ -n "${{ github.event.inputs.envs }}" ]; then
+            JSON_ENV_VARS='${{ github.event.inputs.envs }}'
+            DOCKER_ENV_VARS=$(echo $JSON_ENV_VARS | jq -r '.[] | "-e " + .key + "=" + .value' | tr '\n' ' ')
+            echo "DOCKER_ENV_VARS=$DOCKER_ENV_VARS" >> $GITHUB_ENV
+          fi
+
       - name: SSH and Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -65,7 +77,7 @@ jobs:
             IMAGE_URI="${{ secrets.ECR_REPOSITORY_URL }}:$IMAGE_TAG"
             docker pull $IMAGE_URI
             docker rm -f $IMAGE_TAG
-            docker run -d --name $IMAGE_TAG -p ${{ github.event.inputs.host_port }}:${{ github.event.inputs.container_port }} $IMAGE_URI
+            docker run -d --name $IMAGE_TAG -p ${{ github.event.inputs.host_port }}:${{ github.event.inputs.container_port }} ${DOCKER_ENV_VARS:-} $IMAGE_URI
 
             # Add Nginx site configuration
             sudo bash -c "cat > /etc/nginx/sites-available/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }} <<EOF

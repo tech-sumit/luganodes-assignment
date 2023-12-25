@@ -39,8 +39,6 @@ async function triggerWorkflowDispatch(token: string, owner: string, repo: strin
         inputs
     });
 
-    console.log(JSON.stringify(response, null, 2))
-
     if (response.status == 204) {
         return {isSuccess: true, message: `Workflow ${workflow_name} dispatched successfully.`};
     } else {

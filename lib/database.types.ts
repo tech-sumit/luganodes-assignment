@@ -65,10 +65,12 @@ export interface Database {
 }
 
 export type ProjectsDeploymentStateType =
-    | 'PROJECT_CREATED'
-    | 'DEPLOY_TRIGGERED'
-    | 'DEPLOY_ERROR'
-    | 'DEPLOY_SUCCESS'
-    | 'DESTROY_TRIGGERED'
-    | 'DESTROY_ERROR'
-    | 'DESTROY_SUCCESS';
+    |  'DEPLOY_PENDING'
+    |  'DESTROY_PENDING'
+    |  'DEPLOYING'
+    |  'DEPLOYED'
+    |  'DEPLOY_FAILED'
+    |  'DESTROYING'
+    |  'DESTROYED'
+    |  'DESTROY_FAILED'
+    |  'UNKNOWN';

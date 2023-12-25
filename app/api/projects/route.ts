@@ -77,7 +77,6 @@ export async function POST(req: Request) {
         return NextResponse.json({error: 'Error adding project'}, {status: 500})
     }
 
-    console.error('Project created:', newProject);
 
     if (newProject && newProject.length == 1) {
         newProject = newProject[0]
@@ -172,7 +171,6 @@ export async function PUT(req: Request) {
     }
 
     // Return response
-    console.error('Project updated:', updatedProject);
     return NextResponse.json(
         {message: 'Project updated', data: GetProjectSchema.validate(updatedProject).value},
         {status: 201}
@@ -232,7 +230,6 @@ export async function DELETE(req: Request) {
     }
 
     // Return response
-    console.error('Project soft deleted:', deletedProject);
     return NextResponse.json(
         {message: 'Project deleted', data: projectToTrigger},
         {status: 201}

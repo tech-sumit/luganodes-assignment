@@ -29,8 +29,6 @@ type TriggerResponse = Promise<{
 }>;
 
 async function triggerWorkflowDispatch(token: string, owner: string, repo: string, workflow_name: Workflows, branch: string, inputs: DeployWorkflowInput | DestroyWorkflowInput): TriggerResponse {
-    console.log(JSON.stringify(inputs, null, 2))
-
     const octokit = new Octokit({auth: token});
     const url = 'POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches'
     const response = await octokit.request(url, {

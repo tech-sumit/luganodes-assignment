@@ -67,18 +67,24 @@ jobs:
             IMAGE_TAG=$(echo "${{ github.event.inputs.project_name }}" | tr '[:upper:]@._' '[:lower:]-')
             IMAGE_URI="${{ secrets.ECR_REPOSITORY_URL }}:$IMAGE_TAG"
             
+            # Start container setup
+            docker pull $IMAGE_URI
+            docker rm -f $IMAGE_TAG
+
             # Configure Envs
+            DOCKER_RUN_CMD="docker run -d --name $IMAGE_TAG -p ${{ github.event.inputs.host_port }}:${{ github.event.inputs.container_port }}"
+
             if [ -n "${{ github.event.inputs.envs }}" ]; then
               JSON_ENV_VARS="${{ github.event.inputs.envs }}"
               DOCKER_ENV_VARS=$(echo $JSON_ENV_VARS | jq -r '.[] | "-e " + .key + "=" + .value' | tr '\n' ' ')
-            else
-              DOCKER_ENV_VARS=""
+              DOCKER_RUN_CMD="$DOCKER_RUN_CMD $DOCKER_ENV_VARS"
             fi
-          
-            docker pull $IMAGE_URI
-            docker rm -f $IMAGE_TAG
-            docker run -d --name $IMAGE_TAG -p ${{ github.event.inputs.host_port }}:${{ github.event.inputs.container_port }} ${DOCKER_ENV_VARS} $IMAGE_URI
 
+            DOCKER_RUN_CMD="$DOCKER_RUN_CMD $IMAGE_URI"
+
+            # Execute the Docker run command
+            eval $DOCKER_RUN_CMD
+          
             # Add Nginx site configuration
             sudo bash -c "cat > /etc/nginx/sites-available/$IMAGE_TAG.${{ secrets.SERVER_DOMAIN }} <<EOF
             server {

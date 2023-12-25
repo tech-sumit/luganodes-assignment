@@ -11,7 +11,16 @@ https://github.com/Shaharyar07/Dummy-Server-Node-Express
 Use this repo to test deploy without Dockerfile present case
 https://github.com/heroku/node-js-sample
 
+# Install EC2 requirements
+
+```bash
+sudo apt update
+sudo apt install nginx
+sudo apt install jq
+```
+
 ## Workflow requirements
+
 Workflow's dynamic inputs
 ```yaml
       repo_url:
@@ -20,17 +29,17 @@ Workflow's dynamic inputs
       project_name:
         description: 'Project Name'
         required: true
-      user_name:
-        description: 'User Name'
-        required: true
-      random_host_port:
-        description: 'Random Host Port'
+      host_port:
+        description: 'Host Port'
         required: true
       container_port:
         description: 'Container Port'
         required: true
-      entrypoint_array:
+      entrypoint:
         description: 'Entrypoint Array (JSON format)'
+        required: false
+      envs:
+        description: 'Environment variables'
         required: false
 ```
 

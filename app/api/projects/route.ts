@@ -90,7 +90,7 @@ export async function POST(req: Request) {
         host_port: `${projectToTrigger.host_port}`,
         project_name: projectToTrigger.project_name,
         repo_url: projectToTrigger.repo_url,
-        envs: projectToTrigger.envs
+        envs: JSON.stringify(projectToTrigger.envs)
     })
 
     if (!triggerResponse.isSuccess) {
@@ -158,7 +158,7 @@ export async function PUT(req: Request) {
         host_port: `${projectToTrigger.host_port}`,
         project_name: projectToTrigger.project_name,
         repo_url: projectToTrigger.repo_url,
-        envs: projectToTrigger.envs
+        envs: JSON.stringify(projectToTrigger.envs)
     })
 
     if (!triggerResponse.isSuccess) {

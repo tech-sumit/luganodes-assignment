@@ -6,7 +6,7 @@ type DeployWorkflowInput = {
     host_port: string
     container_port: string
     entrypoint: string
-    envs: object[]
+    envs: string
 }
 
 type DestroyWorkflowInput = {

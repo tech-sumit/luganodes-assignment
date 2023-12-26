@@ -11,7 +11,7 @@ if (!process.env.GITHUB_TOKEN
     || !process.env.DEFAULT_BRANCH
 ) {
     console.log("Environment variables missing to initialise Github integration. shutting down server.")
-    process.exit(1)
+    process.exit(0)
 }
 
 // Initialize TriggerWorkflow with environment variables

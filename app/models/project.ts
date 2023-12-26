@@ -13,7 +13,7 @@ export const GetProjectSchema = Joi.object({
     // Container port, required, integer between 1 and 65535
     container_port: Joi.number().integer().min(1).max(65535).required(),
     // Entrypoint, optional, max length 500
-    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('/^\\[\\s*("([^"\\\\]|\\\\.)*")(,\\s*("([^"\\\\]|\\\\.)*"))*\\s*\\]$/')).allow(''),
+    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('^\\[\\s*"(?:\\\\.|[^"\\\\])*"(?:\\s*,\\s*"(?:\\\\.|[^"\\\\])*")*\\s*\\]$')).allow(''),
     // Environment variables, optional, array of objects with key-value pairs
     envs: Joi.array().items(
         Joi.object({
@@ -51,7 +51,7 @@ export const CreateProjectSchema = Joi.object({
     // Container port: required, integer between 1 and 65535
     container_port: Joi.number().integer().min(1).max(65535).required(),
     // Entrypoint: optional, max length 500, must match specific pattern
-    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('/^\\[\\s*("([^"\\\\]|\\\\.)*")(,\\s*("([^"\\\\]|\\\\.)*"))*\\s*\\]$/')).allow(''),
+    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('^\\[\\s*"(?:\\\\.|[^"\\\\])*"(?:\\s*,\\s*"(?:\\\\.|[^"\\\\])*")*\\s*\\]$')).allow(''),
     // Environment variables: optional, array of key-value pairs
     envs: Joi.array().items(
         Joi.object({
@@ -72,7 +72,7 @@ export const UpdateProjectSchema = Joi.object({
     // Container port: required, integer between 1 and 65535
     container_port: Joi.number().integer().min(1).max(65535).required(),
     // Entrypoint: optional, max length 500, must match specific pattern
-    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('/^\\[\\s*("([^"\\\\]|\\\\.)*")(,\\s*("([^"\\\\]|\\\\.)*"))*\\s*\\]$/')).allow(''),
+    entrypoint: Joi.string().trim().max(500).pattern(new RegExp('^\\[\\s*"(?:\\\\.|[^"\\\\])*"(?:\\s*,\\s*"(?:\\\\.|[^"\\\\])*")*\\s*\\]$')).allow(''),
     // Environment variables: optional, array of key-value pairs
     envs: Joi.array().items(
         Joi.object({

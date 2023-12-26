@@ -1,6 +1,7 @@
 # luganodes-assignment
 
-
+### Architecture Diagram
+![luganodes-assignment-arch.png](docs%2Fluganodes-assignment-arch.png)
 # Github EC2 deployment workflows
 
 Sample Docker file to be added and the deployment workflow

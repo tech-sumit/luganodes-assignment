@@ -70,19 +70,12 @@ jobs:
             # Start container setup
             docker pull $IMAGE_URI
             docker rm -f $IMAGE_TAG
-
-            # Function to ensure JSON keys and values are properly quoted
-            ensure_valid_json() {
-              echo "$1" | \
-              sed -e 's/\([{,]\)\s*\([^"{:]\+\)\s*:/\1 "\2":/g' \  # Add quotes to keys
-                  -e 's/:\s*\([^" ,}\]\+\)\s*\([,}]\)/: "\1"\2/g'  # Add quotes to values
-            }
-
+            
             # Convert JSON env vars to Docker env vars and construct the Docker run command
             DOCKER_RUN_CMD="docker run -d --name $IMAGE_TAG -p ${{ github.event.inputs.host_port }}:${{ github.event.inputs.container_port }}"
-
+            
             if [ -n "${{ github.event.inputs.envs }}" ]; then
-              FIXED_JSON_ENV_VARS=$(ensure_valid_json "${{ github.event.inputs.envs }}")
+              FIXED_JSON_ENV_VARS=$(echo "${{ github.event.inputs.envs }}" | sed -e 's/\([{,]\)\s*\([^"{:]\+\)\s*:/\1 "\2":/g' -e 's/:\s*\([^" ,}\]\+\)\s*\([,}]\)/: "\1"\2/g')
               echo $FIXED_JSON_ENV_VARS
               DOCKER_ENV_VARS=$(echo $FIXED_JSON_ENV_VARS | jq -r '.[] | "-e " + .key + "=" + .value' | tr '\n' ' ')
               DOCKER_RUN_CMD="$DOCKER_RUN_CMD $DOCKER_ENV_VARS"

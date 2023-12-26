@@ -68,7 +68,6 @@ export default function ProjectsPage() {
 
     useEffect(() => {
         setProjects(setData)
-        console.log(data)
         setNotification({
             visibility: true,
             message: "List updated",
@@ -106,7 +105,9 @@ export default function ProjectsPage() {
                         hidden: !(rowData.deleted_at == null || rowData.deleted_at == ''),
                         isFreeAction: false,
                         onClick: (event, data) => {
-                            console.log(data)
+                            if(Array.isArray(data)){
+                                data=data[0]
+                            }
                             router.push('/dashboard/projects/logs?project_name=' + data.project_name)
                         }
                     }),
@@ -116,7 +117,9 @@ export default function ProjectsPage() {
                         hidden: !(rowData.deleted_at == null || rowData.deleted_at == ''),
                         isFreeAction: false,
                         onClick: (event, data) => {
-                            console.log(data)
+                            if(Array.isArray(data)){
+                                data=data[0]
+                            }
                             router.push('/dashboard/projects/update?project_name=' + data.project_name)
 
                         }
@@ -127,7 +130,9 @@ export default function ProjectsPage() {
                             isFreeAction: false,
                             disabled: !(rowData.deleted_at == null || rowData.deleted_at == ''),
                             onClick: (event, data) => {
-                                console.log(data)
+                                if(Array.isArray(data)){
+                                    data=data[0]
+                                }
                                 deleteProject(data.project_name, setData)
                             },
                         }

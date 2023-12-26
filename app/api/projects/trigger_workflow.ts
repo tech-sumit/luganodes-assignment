@@ -91,7 +91,7 @@ export default class TriggerWorkflow {
                 console.log(`Branch '${input.project_name}' created successfully`);
                 return {isSuccess: true, message: `Branch '${input.project_name}' created successfully`};
             }
-        } catch (error) {
+        } catch (error:any) {
             if (error.status === 422) {
                 // Branch already exists, update its head
                 try {
@@ -107,7 +107,7 @@ export default class TriggerWorkflow {
                         console.log(`Branch '${input.project_name}' updated successfully`);
                         return {isSuccess: true, message: `Branch '${input.project_name}' updated successfully`};
                     }
-                } catch (updateError) {
+                } catch (updateError:any) {
                     return {
                         isSuccess: false,
                         message: 'Branch update unsuccessful.',

@@ -52,6 +52,7 @@ interface UpdateProjectItem {
     envs: { key: string; value: string }[];
 }
 
+// @ts-ignore
 export const setProjectByName = async (projectName: string, reset: (values?: (DefaultValues<Project> | ResetAction<Project> | Project), keepStateOptions?: KeepStateOptions) => void) => {
     await fetch('/api/projects?project_name='+projectName, {
         method: 'GET',

@@ -22,7 +22,7 @@ const LogsPage = () => {
         newWebSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
             setLogs((prevLogs) =>
-                [...prevLogs, ...data.streams.flatMap((stream) => stream.values.map((value) => value[1]))]
+                [...prevLogs, ...data.streams.flatMap((stream:any) => stream.values.map((value:any) => value[1]))]
             );
         };
 
@@ -61,6 +61,7 @@ const LogsPage = () => {
                 {logs.map((log, index) => (
                     <div key={index}>{log}</div>
                 ))}
+                {/*@ts-ignore*/}
                 <div ref={logsEndRef}/>
             </div>
         </div>

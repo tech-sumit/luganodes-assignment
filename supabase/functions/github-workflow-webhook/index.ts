@@ -1,3 +1,4 @@
+// @ts-ignore
 import {createClient} from 'https://esm.sh/@supabase/supabase-js'
 
 const corsHeaders = {
@@ -22,6 +23,7 @@ function determineDeploymentState(action: string, conclusion: string | null, wor
     }
 }
 
+// @ts-ignore
 Deno.serve(async (req: Request) => {
     if (req.method === 'OPTIONS') {
         return new Response('ok', {headers: corsHeaders})
@@ -43,8 +45,8 @@ Deno.serve(async (req: Request) => {
         const deploymentState = determineDeploymentState(action, conclusion, workflowName);
 
         const supabase = createClient(
-            Deno.env.get('SUPABASE_URL') ?? '',
-            Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+            // @ts-ignore
+            Deno.env.get('SUPABASE_URL') ?? '',Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
         )
 
         await supabase.from("projects")

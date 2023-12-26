@@ -18,6 +18,7 @@ Loki datasource host: http://loki:3100
        }
     }
     ```
+   then restart docker daemon
    ![daemon_json.png](..%2Fdocs%2Fdaemon_json.png)
 3. Copy logStackSetup on EC2 & start docker compose stack
     ```bash

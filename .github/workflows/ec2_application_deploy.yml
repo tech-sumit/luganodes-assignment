@@ -76,7 +76,6 @@ jobs:
             
             if [ -n "${{ github.event.inputs.envs }}" ]; then
               FIXED_JSON_ENV_VARS=$(echo "${{ github.event.inputs.envs }}" | sed -e 's/\([{,]\)\s*\([^"{:]\+\)\s*:/\1 "\2":/g' -e 's/:\s*\([^" ,}\]\+\)\s*\([,}]\)/: "\1"\2/g')
-              echo $FIXED_JSON_ENV_VARS
               DOCKER_ENV_VARS=$(echo $FIXED_JSON_ENV_VARS | jq -r '.[] | "-e " + .key + "=" + .value' | tr '\n' ' ')
               DOCKER_RUN_CMD="$DOCKER_RUN_CMD $DOCKER_ENV_VARS"
             fi

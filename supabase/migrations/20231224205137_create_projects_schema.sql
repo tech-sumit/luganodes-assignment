@@ -51,9 +51,9 @@ EXECUTE FUNCTION projects_set_public_host();
 
 -- START SET Dynamic host_port
 CREATE SEQUENCE projects_host_port_seq
-    START WITH 1024
+    START WITH 5000
     INCREMENT BY 1
-    MINVALUE 1024
+    MINVALUE 5000
     MAXVALUE 65535
     NO CYCLE;
 

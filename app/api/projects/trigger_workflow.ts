@@ -78,44 +78,52 @@ export default class TriggerWorkflow {
         });
         const sha = refData.object.sha;
 
-        // Try to create a new branch using the latest commit SHA
-        const createResponse = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
-            owner: this.owner,
-            repo: this.repo,
-            ref: `refs/heads/${input.project_name}`,
-            sha
-        });
-
-        if (createResponse.status === 201) {
-            console.log(`Branch '${input.project_name}' created successfully`);
-            return {isSuccess: true, message: `Branch '${input.project_name}' created successfully`};
-        } else if (createResponse.status === 422) {
-            // Branch already exists, update its head
-            const updateResponse = await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/heads/{branch}', {
+        try {
+            // Try to create a new branch using the latest commit SHA
+            const createResponse = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
                 owner: this.owner,
                 repo: this.repo,
-                branch: input.project_name,
-                sha,
-                force: true
+                ref: `refs/heads/${input.project_name}`,
+                sha
             });
 
-            if (updateResponse.status === 200) {
-                console.log(`Branch '${input.project_name}' updated successfully`);
-                return {isSuccess: true, message: `Branch '${input.project_name}' updated successfully`};
-            } else {
-                return {
-                    isSuccess: false,
-                    message: 'Branch update unsuccessful.',
-                    error: JSON.stringify(updateResponse.data)
-                };
+            if (createResponse.status === 201) {
+                console.log(`Branch '${input.project_name}' created successfully`);
+                return {isSuccess: true, message: `Branch '${input.project_name}' created successfully`};
             }
-        } else {
+        } catch (error) {
+            if (error.status === 422) {
+                // Branch already exists, update its head
+                try {
+                    const updateResponse = await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/heads/{branch}', {
+                        owner: this.owner,
+                        repo: this.repo,
+                        branch: input.project_name,
+                        sha,
+                        force: true  // Set to false if you don't want to force the update
+                    });
+
+                    if (updateResponse.status === 200) {
+                        console.log(`Branch '${input.project_name}' updated successfully`);
+                        return {isSuccess: true, message: `Branch '${input.project_name}' updated successfully`};
+                    }
+                } catch (updateError) {
+                    return {
+                        isSuccess: false,
+                        message: 'Branch update unsuccessful.',
+                        error: JSON.stringify(updateError.data)
+                    };
+                }
+            }
             return {
                 isSuccess: false,
                 message: 'Branch creation or update unsuccessful.',
-                error: JSON.stringify(createResponse)
+                error: JSON.stringify(error.data)
             };
         }
+
+        // General fallback for unexpected outcomes
+        return {isSuccess: false, message: 'Unexpected outcome in branch creation or update.'};
     }
 
     async deleteBranch(project_name: string): TriggerResponse {

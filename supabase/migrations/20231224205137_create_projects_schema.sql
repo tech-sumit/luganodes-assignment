@@ -1,4 +1,5 @@
 CREATE TYPE projects_deployment_state_type AS ENUM (
+    'PROJECT_CREATED',
     'DEPLOY_PENDING',
     'DESTROY_PENDING',
     'DEPLOYING',

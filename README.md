@@ -74,14 +74,15 @@ Add following variables to github's repository secrets to enable complete workfl
 Run following command with all envs passed
 ```bash
 docker run -p 3000:3000 \
--e NEXT_PUBLIC_SUPABASE_URL=<NEXT_PUBLIC_SUPABASE_URL> \
--e NEXT_PUBLIC_SUPABASE_ANON_KEY=<NEXT_PUBLIC_SUPABASE_ANON_KEY> \
--e NEXT_PRIVATE_SUPABASE_SERVICE_KEY=<NEXT_PRIVATE_SUPABASE_SERVICE_KEY> \
--e GITHUB_TOKEN=<GITHUB_TOKEN> \
--e REPO_OWNER=<REPO_OWNER> \
--e REPO_NAME=<REPO_NAME> \
--e DEFAULT_BRANCH=<DEFAULT_BRANCH> \
--e LOGS_WEBSOCKET_HOST=<LOGS_WEBSOCKET_HOST> \
-luganodes-assignment:latest
+-e NEXT_PUBLIC_SUPABASE_URL=https://nmgklmsdzbdruerlwuop.supabase.co \
+-e NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5tZ2tsbXNkemJkcnVlcmx3dW9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDMwOTQ2MjYsImV4cCI6MjAxODY3MDYyNn0.tqvtnPsVHGRVIRtXt5LKBZHzd6ABBqlm_KZYzMRQzMc \
+-e NEXT_PRIVATE_SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5tZ2tsbXNkemJkcnVlcmx3dW9wIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzA5NDYyNiwiZXhwIjoyMDE4NjcwNjI2fQ.FqUQEaqHMftK48GP1ei60VfCBUmmkGtavu1jNHq74I8 \
+-e GITHUB_TOKEN=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 \
+-e REPO_OWNER=tech-sumit \
+-e REPO_NAME=luganodes-assignment \
+-e DEFAULT_BRANCH=main \
+-e LOGS_WEBSOCKET_HOST=ws://logs.bazzarapp.in/lokiapi \
+420610997961.dkr.ecr.ap-south-1.amazonaws.com/projects:luganodes-assignment
+
 ```
 

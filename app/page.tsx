@@ -6,6 +6,7 @@ import {createClient} from "@/utils/supabase/server";
 import {cookies} from "next/headers";
 import {redirect} from 'next/navigation'
 import Toolbar from "@mui/material/Toolbar";
+import LogoBlack from "@/components/LogoDark";
 
 export default async function Index() {
     const cookieStore = cookies()
@@ -19,7 +20,7 @@ export default async function Index() {
             <div className="flex-1 w-full flex flex-col items-center">
                 <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
                     <div className="w-full flex justify-between items-center p-3 text-sm">
-                        <Logo/>
+                        <LogoBlack/>
                         <AuthButton/>
                     </div>
                 </nav>

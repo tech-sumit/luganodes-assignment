@@ -70,3 +70,18 @@ Add following variables to github's repository secrets to enable complete workfl
 | `GH_API_TOKEN`         | `GitHub access Token with workflow and repository full access permissions` |
 | `SERVER_DOMAIN`        | `Server Domain (ex. bazzarapp.in)`                                         |
 
+## Running the container
+Run following command with all envs passed
+```bash
+docker run -p 3000:3000 \
+-e NEXT_PUBLIC_SUPABASE_URL=<NEXT_PUBLIC_SUPABASE_URL> \
+-e NEXT_PUBLIC_SUPABASE_ANON_KEY=<NEXT_PUBLIC_SUPABASE_ANON_KEY> \
+-e NEXT_PRIVATE_SUPABASE_SERVICE_KEY=<NEXT_PRIVATE_SUPABASE_SERVICE_KEY> \
+-e GITHUB_TOKEN=<GITHUB_TOKEN> \
+-e REPO_OWNER=<REPO_OWNER> \
+-e REPO_NAME=<REPO_NAME> \
+-e DEFAULT_BRANCH=<DEFAULT_BRANCH> \
+-e LOGS_WEBSOCKET_HOST=<LOGS_WEBSOCKET_HOST> \
+luganodes-assignment:latest
+```
+

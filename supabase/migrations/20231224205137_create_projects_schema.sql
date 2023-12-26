@@ -33,7 +33,7 @@ CREATE TABLE projects (
 CREATE OR REPLACE FUNCTION projects_set_public_host()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.public_host := 'http://' || NEW.project_name || '.bazzarapp.in';
+    NEW.public_host := 'http://' || LOWER(NEW.project_name) || '.bazzarapp.in';
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;

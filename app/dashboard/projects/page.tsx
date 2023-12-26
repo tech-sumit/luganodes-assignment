@@ -57,9 +57,7 @@ export default function ProjectsPage() {
             type: 'string'
         },
         {title: 'Public HOST', field: 'public_host', type: 'string', editable: 'never'},
-        {title: 'Created At', field: 'created_at', type: 'datetime', editable: 'never'},
-        {title: 'Updated At', field: 'updated_at', type: 'datetime', editable: 'never'},
-        {title: 'Deleted At', field: 'deleted_at', type: 'datetime', editable: 'never'},
+        {title: 'Is deleted', field: 'deleted_at', type: 'datetime', editable: 'never'},
     ]);
     const [data, setData] = useState<ProjectItem[]>([]);
     const [notification, setNotification] = useState<NotificationData>({

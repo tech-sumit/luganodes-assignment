@@ -29,17 +29,9 @@ import {createClient} from "@/utils/supabase/client";
 const drawerWidth = 240;
 const MenuList=[
     {
-        text: 'Home',
-        path: '/dashboard',
-        icon: HomeIcon
-    }, {
         text: 'Projects',
         path: '/dashboard/projects',
         icon: TaskAltIcon
-    }, {
-        text: 'Logs',
-        path: '/dashboard/logs',
-        icon: TroubleshootIcon
     }, {
         text: 'About',
         path: '/dashboard/about',

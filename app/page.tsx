@@ -13,7 +13,7 @@ export default async function Index() {
     const {data: {user}} = await supabase.auth.getUser()
 
     if (user) {
-        return redirect('/dashboard')
+        return redirect('/dashboard/projects')
     } else {
         return (
             <div className="flex-1 w-full flex flex-col items-center">

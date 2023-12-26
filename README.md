@@ -18,6 +18,7 @@ https://github.com/winstonjs/winston
 sudo apt update
 sudo apt install nginx
 sudo apt install jq
+sudo apt install awscli
 ```
 
 ## Add line to Nginx.conf
@@ -73,7 +74,7 @@ Add following variables to github's repository secrets to enable complete workfl
 ## Running the container
 Run following command with all envs passed
 ```bash
-docker run -p 3000:3000 \
+docker run -d -p 3000:3000 \
 -e NEXT_PUBLIC_SUPABASE_URL=<NEXT_PUBLIC_SUPABASE_URL> \
 -e NEXT_PUBLIC_SUPABASE_ANON_KEY=<NEXT_PUBLIC_SUPABASE_ANON_KEY> \
 -e NEXT_PRIVATE_SUPABASE_SERVICE_KEY=<NEXT_PRIVATE_SUPABASE_SERVICE_KEY> \

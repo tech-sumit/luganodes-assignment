@@ -67,10 +67,10 @@ export default class TriggerWorkflow {
         return triggerWorkflowDispatch(this.token, this.owner, this.repo, Workflows.Destroy, input.project_name, input)
     }
 
-    async createBranch(input: CreateBranchInput): TriggerResponse {
+    async createUpdateBranch(input: CreateBranchInput): TriggerResponse {
         const octokit = new Octokit({auth: this.token});
+
         // Get the latest commit SHA of the base branch
-        // SUCCESS code 200
         const {data: refData} = await octokit.request('GET /repos/{owner}/{repo}/git/ref/heads/{branch}', {
             owner: this.owner,
             repo: this.repo,
@@ -78,20 +78,43 @@ export default class TriggerWorkflow {
         });
         const sha = refData.object.sha;
 
-        // Create a new branch using the latest commit SHA
-        // SUCCESS code 201
-        const response = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
+        // Try to create a new branch using the latest commit SHA
+        const createResponse = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
             owner: this.owner,
             repo: this.repo,
             ref: `refs/heads/${input.project_name}`,
             sha
         });
 
-        if (response.status == 201) {
+        if (createResponse.status === 201) {
             console.log(`Branch '${input.project_name}' created successfully`);
             return {isSuccess: true, message: `Branch '${input.project_name}' created successfully`};
+        } else if (createResponse.status === 422) {
+            // Branch already exists, update its head
+            const updateResponse = await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/heads/{branch}', {
+                owner: this.owner,
+                repo: this.repo,
+                branch: input.project_name,
+                sha,
+                force: true
+            });
+
+            if (updateResponse.status === 200) {
+                console.log(`Branch '${input.project_name}' updated successfully`);
+                return {isSuccess: true, message: `Branch '${input.project_name}' updated successfully`};
+            } else {
+                return {
+                    isSuccess: false,
+                    message: 'Branch update unsuccessful.',
+                    error: JSON.stringify(updateResponse.data)
+                };
+            }
         } else {
-            return {isSuccess: false, message: 'Branch creation unsuccessful.', error: JSON.stringify(response.data)};
+            return {
+                isSuccess: false,
+                message: 'Branch creation or update unsuccessful.',
+                error: JSON.stringify(createResponse)
+            };
         }
     }
 
@@ -116,7 +139,7 @@ export default class TriggerWorkflow {
     async createAndDeploy(input: DeployWorkflowInput): TriggerResponse {
         try {
             // Create the branch
-            const createBranchResponse = await this.createBranch(input);
+            const createBranchResponse = await this.createUpdateBranch(input);
             if (!createBranchResponse.isSuccess) {
                 return createBranchResponse;
             }

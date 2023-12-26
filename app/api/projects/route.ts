@@ -152,7 +152,7 @@ export async function PUT(req: Request) {
     let projectToTrigger = GetProjectSchema.validate(updatedProject).value
 
     // Trigger redeploy workflow
-    const triggerResponse = await trigger.deploy({
+    const triggerResponse = await trigger.createAndDeploy({
         container_port: `${projectToTrigger.container_port}`,
         entrypoint: projectToTrigger.entrypoint,
         host_port: `${projectToTrigger.host_port}`,

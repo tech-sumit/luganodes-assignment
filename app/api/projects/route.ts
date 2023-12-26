@@ -4,6 +4,7 @@ import {CreateProjectSchema, DeleteProjectSchema, GetProjectSchema, UpdateProjec
 import {NextRequest, NextResponse} from "next/server";
 import TriggerWorkflow from "@/app/api/projects/trigger_workflow";
 
+// Check required environment variables for GitHub integration
 if (!process.env.GITHUB_TOKEN
     || !process.env.REPO_OWNER
     || !process.env.REPO_NAME
@@ -13,19 +14,23 @@ if (!process.env.GITHUB_TOKEN
     process.exit(1)
 }
 
+// Initialize TriggerWorkflow with environment variables
 const trigger = new TriggerWorkflow(
     process.env.GITHUB_TOKEN,
     process.env.REPO_OWNER,
     process.env.REPO_NAME
 )
 
+// Force dynamic import behavior in Next.js
 export const dynamic = 'force-dynamic' // defaults to auto
 
+// Handler for GET requests
 export async function GET(req: NextRequest) {
     const cookieStore = cookies()
     const supabase = createClient(cookieStore);
     const {data: {session}} = await supabase.auth.getSession()
 
+    // Fetch specific project or all projects based on query parameter
     if (req.nextUrl.searchParams.has('project_name') && req.nextUrl.searchParams.get('project_name')) {
         var {data: project} = await supabase.from("projects")
             .select()
@@ -35,12 +40,15 @@ export async function GET(req: NextRequest) {
         if (project && project.length == 1) {
             project = project[0]
         }
+
+        // Returns response with project details
         return NextResponse.json(
             {message: 'Projects fetched', data: GetProjectSchema.validate(project).value},
             {status: 200}
         )
     }
 
+    // Returns response with project details
     const {data} = await supabase.from("projects")
         .select()
         .eq('user_id', session?.user.id);
@@ -111,6 +119,7 @@ export async function POST(req: Request) {
     )
 }
 
+// Handler for PUT requests to update an existing project
 export async function PUT(req: Request) {
     // Authenticate session
     const cookieStore = cookies()
@@ -119,6 +128,7 @@ export async function PUT(req: Request) {
 
     const body = await req.json()
 
+    // Authenticate, validate, update project details
     // Validate request
     let {error: validationError, value: project} = UpdateProjectSchema.validate(body)
     if (validationError) {
@@ -151,7 +161,7 @@ export async function PUT(req: Request) {
     }
     let projectToTrigger = GetProjectSchema.validate(updatedProject).value
 
-    // Trigger redeploy workflow
+    // Trigger redeploy workflow and return response
     const triggerResponse = await trigger.createAndDeploy({
         container_port: `${projectToTrigger.container_port}`,
         entrypoint: projectToTrigger.entrypoint,
@@ -179,6 +189,7 @@ export async function PUT(req: Request) {
     )
 }
 
+// Handler for DELETE requests to delete a project
 export async function DELETE(req: Request) {
     // Authenticate session
     const cookieStore = cookies()
@@ -187,6 +198,7 @@ export async function DELETE(req: Request) {
 
     const body = await req.json()
 
+    // Authenticate, validate, and soft delete the project
     // Validate request
     let {error: validationError, value: project} = DeleteProjectSchema.validate(body)
     if (validationError) {
@@ -215,7 +227,7 @@ export async function DELETE(req: Request) {
     }
     let projectToTrigger = GetProjectSchema.validate(deletedProject).value
 
-    // Trigger delete branch and destroy infra workflow
+    // Trigger workflow to delete branch and destroy infrastructure, then return response
     const triggerResponse = await trigger.destroy({
         project_name: projectToTrigger.project_name,
     })

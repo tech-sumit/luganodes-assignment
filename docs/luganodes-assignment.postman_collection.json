@@ -1,0 +1,621 @@
+{
+	"info": {
+		"_postman_id": "7147c993-2c72-40e2-9431-55df4f94675f",
+		"name": "luganodes-assignment",
+		"description": "Project lifecycle API documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7867258"
+	},
+	"item": [
+		{
+			"name": "GET /api/projects",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Cookie",
+						"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+					},
+					{
+						"key": "Referer",
+						"value": "http://bazzarapp.in/dashboard/projects"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "http://bazzarapp.in/api/projects",
+					"protocol": "http",
+					"host": [
+						"bazzarapp",
+						"in"
+					],
+					"path": [
+						"api",
+						"projects"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET /api/projects",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Cookie",
+								"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+							},
+							{
+								"key": "Referer",
+								"value": "http://bazzarapp.in/dashboard/projects"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "http://bazzarapp.in/api/projects",
+							"protocol": "http",
+							"host": [
+								"bazzarapp",
+								"in"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Projects fetched\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"user_id\": \"14e8c17d-675d-4c76-a209-e9f596874908\",\n            \"project_name\": \"test123\",\n            \"description\": \"\",\n            \"repo_url\": \"devashar13/todobackend\",\n            \"host_port\": 5003,\n            \"container_port\": 8081,\n            \"entrypoint\": \"[\\\"node\\\",\\\"server.js\\\"]\",\n            \"envs\": [],\n            \"deployment_state\": \"DESTROYED\",\n            \"deployment_error\": \"\",\n            \"public_host\": \"http://test123.bazzarapp.in\",\n            \"created_at\": \"2023-12-26T20:26:18.799857\",\n            \"updated_at\": \"2023-12-26T20:26:18.799857\",\n            \"deleted_at\": \"2023-12-26T20:28:45.565\"\n        },\n        {\n            \"id\": 5,\n            \"user_id\": \"14e8c17d-675d-4c76-a209-e9f596874908\",\n            \"project_name\": \"Dummy-Server-Node-Express\",\n            \"description\": \"Shaharyar07/Dummy-Server-Node-Express\",\n            \"repo_url\": \"Shaharyar07/Dummy-Server-Node-Express\",\n            \"host_port\": 5004,\n            \"container_port\": 3000,\n            \"entrypoint\": \"\",\n            \"envs\": [],\n            \"deployment_state\": \"DEPLOYED\",\n            \"deployment_error\": \"\",\n            \"public_host\": \"http://dummy-server-node-express.bazzarapp.in\",\n            \"created_at\": \"2023-12-27T06:47:43.325563\",\n            \"updated_at\": \"2023-12-27T06:47:43.325563\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 3,\n            \"user_id\": \"14e8c17d-675d-4c76-a209-e9f596874908\",\n            \"project_name\": \"winston-logger\",\n            \"description\": \"davidctj/winston-logger\",\n            \"repo_url\": \"davidctj/winston-logger\",\n            \"host_port\": 5002,\n            \"container_port\": 3000,\n            \"entrypoint\": \"[\\\"node\\\",\\\"index.js\\\"]\",\n            \"envs\": [],\n            \"deployment_state\": \"DEPLOYED\",\n            \"deployment_error\": \"\",\n            \"public_host\": \"http://winston-logger.bazzarapp.in\",\n            \"created_at\": \"2023-12-26T14:41:08.181164\",\n            \"updated_at\": \"2023-12-26T14:41:08.181164\",\n            \"deleted_at\": null\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "POST /api/projects",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+					},
+					{
+						"key": "Origin",
+						"value": "http://bazzarapp.in"
+					},
+					{
+						"key": "Referer",
+						"value": "http://bazzarapp.in/dashboard/projects/create"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"project_name\": {{project_name}},\n    \"description\": \"Shaharyar07/Dummy-Server-Node-Express\",\n    \"repo_url\": \"Shaharyar07/Dummy-Server-Node-Express\",\n    \"container_port\": 3000,\n    \"entrypoint\": \"\",\n    \"envs\": []\n}"
+				},
+				"url": {
+					"raw": "http://bazzarapp.in/api/projects",
+					"protocol": "http",
+					"host": [
+						"bazzarapp",
+						"in"
+					],
+					"path": [
+						"api",
+						"projects"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST /api/projects",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+							},
+							{
+								"key": "Origin",
+								"value": "http://bazzarapp.in"
+							},
+							{
+								"key": "Referer",
+								"value": "http://bazzarapp.in/dashboard/projects/create"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"project_name\": winston-logger,\n    \"description\": \"Shaharyar07/Dummy-Server-Node-Express\",\n    \"repo_url\": \"Shaharyar07/Dummy-Server-Node-Express\",\n    \"container_port\": 3000,\n    \"entrypoint\": \"\",\n    \"envs\": []\n}"
+						},
+						"url": {
+							"raw": "http://bazzarapp.in/api/projects",
+							"protocol": "http",
+							"host": [
+								"bazzarapp",
+								"in"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Project created\",\n    \"data\": {\n        \"id\": 5,\n        \"user_id\": \"14e8c17d-675d-4c76-a209-e9f596874908\",\n        \"project_name\": \"Dummy-Server-Node-Express\",\n        \"description\": \"Shaharyar07/Dummy-Server-Node-Express\",\n        \"repo_url\": \"Shaharyar07/Dummy-Server-Node-Express\",\n        \"host_port\": 5004,\n        \"container_port\": 3000,\n        \"entrypoint\": \"\",\n        \"envs\": [],\n        \"deployment_state\": \"PROJECT_CREATED\",\n        \"deployment_error\": \"\",\n        \"public_host\": \"http://dummy-server-node-express.bazzarapp.in\",\n        \"created_at\": \"2023-12-27T06:47:43.325563\",\n        \"updated_at\": \"2023-12-27T06:47:43.325563\",\n        \"deleted_at\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "PUT /api/projects",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+					},
+					{
+						"key": "Origin",
+						"value": "http://bazzarapp.in"
+					},
+					{
+						"key": "Referer",
+						"value": "http://bazzarapp.in/dashboard/projects/update?project_name=Dummy-Server-Node-Express"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"project_name\": {{project_name}},\n    \"description\": \"Shaharyar07/Dummy-Server-Node-Express\",\n    \"repo_url\": \"Shaharyar07/Dummy-Server-Node-Express\",\n    \"container_port\": 3000,\n    \"entrypoint\": \"\",\n    \"envs\": []\n}"
+				},
+				"url": {
+					"raw": "http://bazzarapp.in/api/projects",
+					"protocol": "http",
+					"host": [
+						"bazzarapp",
+						"in"
+					],
+					"path": [
+						"api",
+						"projects"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "PUT /api/projects",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+							},
+							{
+								"key": "Origin",
+								"value": "http://bazzarapp.in"
+							},
+							{
+								"key": "Referer",
+								"value": "http://bazzarapp.in/dashboard/projects/update?project_name=Dummy-Server-Node-Express"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"project_name\": winston-logger,\n    \"description\": \"Shaharyar07/Dummy-Server-Node-Express\",\n    \"repo_url\": \"Shaharyar07/Dummy-Server-Node-Express\",\n    \"container_port\": 3000,\n    \"entrypoint\": \"\",\n    \"envs\": []\n}"
+						},
+						"url": {
+							"raw": "http://bazzarapp.in/api/projects",
+							"protocol": "http",
+							"host": [
+								"bazzarapp",
+								"in"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Project updated\",\n    \"data\": {\n        \"id\": 5,\n        \"user_id\": \"14e8c17d-675d-4c76-a209-e9f596874908\",\n        \"project_name\": \"Dummy-Server-Node-Express\",\n        \"description\": \"Shaharyar07/Dummy-Server-Node-Express\",\n        \"repo_url\": \"Shaharyar07/Dummy-Server-Node-Express\",\n        \"host_port\": 5004,\n        \"container_port\": 3000,\n        \"entrypoint\": \"\",\n        \"envs\": [],\n        \"deployment_state\": \"DEPLOYED\",\n        \"deployment_error\": \"\",\n        \"public_host\": \"http://dummy-server-node-express.bazzarapp.in\",\n        \"created_at\": \"2023-12-27T06:47:43.325563\",\n        \"updated_at\": \"2023-12-27T06:47:43.325563\",\n        \"deleted_at\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE /api/projects",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+					},
+					{
+						"key": "Origin",
+						"value": "http://bazzarapp.in"
+					},
+					{
+						"key": "Referer",
+						"value": "http://bazzarapp.in/dashboard/projects"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"project_name\": {{project_name}}\n}"
+				},
+				"url": {
+					"raw": "http://bazzarapp.in/api/projects",
+					"protocol": "http",
+					"host": [
+						"bazzarapp",
+						"in"
+					],
+					"path": [
+						"api",
+						"projects"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE /api/projects",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+							},
+							{
+								"key": "Origin",
+								"value": "http://bazzarapp.in"
+							},
+							{
+								"key": "Referer",
+								"value": "http://bazzarapp.in/dashboard/projects"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"project_name\": winston-logger\n}"
+						},
+						"url": {
+							"raw": "http://bazzarapp.in/api/projects",
+							"protocol": "http",
+							"host": [
+								"bazzarapp",
+								"in"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Project deleted\",\n    \"data\": {\n        \"id\": 5,\n        \"user_id\": \"14e8c17d-675d-4c76-a209-e9f596874908\",\n        \"project_name\": \"Dummy-Server-Node-Express\",\n        \"description\": \"Shaharyar07/Dummy-Server-Node-Express\",\n        \"repo_url\": \"Shaharyar07/Dummy-Server-Node-Express\",\n        \"host_port\": 5004,\n        \"container_port\": 3000,\n        \"entrypoint\": \"\",\n        \"envs\": [],\n        \"deployment_state\": \"DEPLOYED\",\n        \"deployment_error\": \"\",\n        \"public_host\": \"http://dummy-server-node-express.bazzarapp.in\",\n        \"created_at\": \"2023-12-27T06:47:43.325563\",\n        \"updated_at\": \"2023-12-27T06:47:43.325563\",\n        \"deleted_at\": \"2023-12-27T06:53:13\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "GET By ID /api/projects?project_name={{project_name}}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Cookie",
+						"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+					},
+					{
+						"key": "Referer",
+						"value": "http://bazzarapp.in/dashboard/projects/update?project_name=winston-logger"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "http://bazzarapp.in/api/projects?project_name={{project_name}}",
+					"protocol": "http",
+					"host": [
+						"bazzarapp",
+						"in"
+					],
+					"path": [
+						"api",
+						"projects"
+					],
+					"query": [
+						{
+							"key": "project_name",
+							"value": "{{project_name}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET By ID /api/projects?project_name=winston-logger",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Cookie",
+								"value": "pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D"
+							},
+							{
+								"key": "Referer",
+								"value": "http://bazzarapp.in/dashboard/projects/update?project_name=winston-logger"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "http://bazzarapp.in/api/projects?project_name=winston-logger",
+							"protocol": "http",
+							"host": [
+								"bazzarapp",
+								"in"
+							],
+							"path": [
+								"api",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "project_name",
+									"value": "winston-logger"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Projects fetched\",\n    \"data\": {\n        \"id\": 3,\n        \"user_id\": \"14e8c17d-675d-4c76-a209-e9f596874908\",\n        \"project_name\": \"winston-logger\",\n        \"description\": \"davidctj/winston-logger\",\n        \"repo_url\": \"davidctj/winston-logger\",\n        \"host_port\": 5002,\n        \"container_port\": 3000,\n        \"entrypoint\": \"[\\\"node\\\",\\\"index.js\\\"]\",\n        \"envs\": [],\n        \"deployment_state\": \"DEPLOYED\",\n        \"deployment_error\": \"\",\n        \"public_host\": \"http://winston-logger.bazzarapp.in\",\n        \"created_at\": \"2023-12-26T14:41:08.181164\",\n        \"updated_at\": \"2023-12-26T14:41:08.181164\",\n        \"deleted_at\": null\n    }\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "project_name",
+			"value": "winston-logger"
+		}
+	]
+}

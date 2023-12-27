@@ -1,0 +1,762 @@
+openapi: 3.0.0
+info:
+  title: luganodes-assignment
+  description: Project lifecycle API documentation
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://bazzarapp.in/api
+  variables: {}
+paths:
+  /projects:
+    get:
+      tags:
+      - Misc
+      summary: GET /api/projects
+      operationId: GET/api/projects
+      parameters:
+      - name: Cookie
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/GETapiprojects'
+                - example:
+                    message: Projects fetched
+                    data:
+                    - id: 4
+                      user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                      project_name: test123
+                      description: ''
+                      repo_url: devashar13/todobackend
+                      host_port: 5003
+                      container_port: 8081
+                      entrypoint: '["node","server.js"]'
+                      envs: []
+                      deployment_state: DESTROYED
+                      deployment_error: ''
+                      public_host: http://test123.bazzarapp.in
+                      created_at: 2023-12-26T20:26:18.799857
+                      updated_at: 2023-12-26T20:26:18.799857
+                      deleted_at: 2023-12-26T20:28:45.565
+                    - id: 5
+                      user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                      project_name: Dummy-Server-Node-Express
+                      description: Shaharyar07/Dummy-Server-Node-Express
+                      repo_url: Shaharyar07/Dummy-Server-Node-Express
+                      host_port: 5004
+                      container_port: 3000
+                      entrypoint: ''
+                      envs: []
+                      deployment_state: DEPLOYED
+                      deployment_error: ''
+                      public_host: http://dummy-server-node-express.bazzarapp.in
+                      created_at: 2023-12-27T06:47:43.325563
+                      updated_at: 2023-12-27T06:47:43.325563
+                      deleted_at: null
+                    - id: 3
+                      user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                      project_name: winston-logger
+                      description: davidctj/winston-logger
+                      repo_url: davidctj/winston-logger
+                      host_port: 5002
+                      container_port: 3000
+                      entrypoint: '["node","index.js"]'
+                      envs: []
+                      deployment_state: DEPLOYED
+                      deployment_error: ''
+                      public_host: http://winston-logger.bazzarapp.in
+                      created_at: 2023-12-26T14:41:08.181164
+                      updated_at: 2023-12-26T14:41:08.181164
+                      deleted_at: null
+              example:
+                message: Projects fetched
+                data:
+                - id: 4
+                  user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                  project_name: test123
+                  description: ''
+                  repo_url: devashar13/todobackend
+                  host_port: 5003
+                  container_port: 8081
+                  entrypoint: '["node","server.js"]'
+                  envs: []
+                  deployment_state: DESTROYED
+                  deployment_error: ''
+                  public_host: http://test123.bazzarapp.in
+                  created_at: 2023-12-26T20:26:18.799857
+                  updated_at: 2023-12-26T20:26:18.799857
+                  deleted_at: 2023-12-26T20:28:45.565
+                - id: 5
+                  user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                  project_name: Dummy-Server-Node-Express
+                  description: Shaharyar07/Dummy-Server-Node-Express
+                  repo_url: Shaharyar07/Dummy-Server-Node-Express
+                  host_port: 5004
+                  container_port: 3000
+                  entrypoint: ''
+                  envs: []
+                  deployment_state: DEPLOYED
+                  deployment_error: ''
+                  public_host: http://dummy-server-node-express.bazzarapp.in
+                  created_at: 2023-12-27T06:47:43.325563
+                  updated_at: 2023-12-27T06:47:43.325563
+                  deleted_at: null
+                - id: 3
+                  user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                  project_name: winston-logger
+                  description: davidctj/winston-logger
+                  repo_url: davidctj/winston-logger
+                  host_port: 5002
+                  container_port: 3000
+                  entrypoint: '["node","index.js"]'
+                  envs: []
+                  deployment_state: DEPLOYED
+                  deployment_error: ''
+                  public_host: http://winston-logger.bazzarapp.in
+                  created_at: 2023-12-26T14:41:08.181164
+                  updated_at: 2023-12-26T14:41:08.181164
+                  deleted_at: null
+      deprecated: false
+    post:
+      tags:
+      - Misc
+      summary: POST /api/projects
+      operationId: POST/api/projects
+      parameters:
+      - name: Cookie
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: >-
+                {
+                    "project_name": winston-logger,
+                    "description": "Shaharyar07/Dummy-Server-Node-Express",
+                    "repo_url": "Shaharyar07/Dummy-Server-Node-Express",
+                    "container_port": 3000,
+                    "entrypoint": "",
+                    "envs": []
+                }
+            example: >-
+              {
+                  "project_name": winston-logger,
+                  "description": "Shaharyar07/Dummy-Server-Node-Express",
+                  "repo_url": "Shaharyar07/Dummy-Server-Node-Express",
+                  "container_port": 3000,
+                  "entrypoint": "",
+                  "envs": []
+              }
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/POSTapiprojects'
+                - example:
+                    message: Project created
+                    data:
+                      id: 5
+                      user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                      project_name: Dummy-Server-Node-Express
+                      description: Shaharyar07/Dummy-Server-Node-Express
+                      repo_url: Shaharyar07/Dummy-Server-Node-Express
+                      host_port: 5004
+                      container_port: 3000
+                      entrypoint: ''
+                      envs: []
+                      deployment_state: PROJECT_CREATED
+                      deployment_error: ''
+                      public_host: http://dummy-server-node-express.bazzarapp.in
+                      created_at: 2023-12-27T06:47:43.325563
+                      updated_at: 2023-12-27T06:47:43.325563
+                      deleted_at: null
+              example:
+                message: Project created
+                data:
+                  id: 5
+                  user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                  project_name: Dummy-Server-Node-Express
+                  description: Shaharyar07/Dummy-Server-Node-Express
+                  repo_url: Shaharyar07/Dummy-Server-Node-Express
+                  host_port: 5004
+                  container_port: 3000
+                  entrypoint: ''
+                  envs: []
+                  deployment_state: PROJECT_CREATED
+                  deployment_error: ''
+                  public_host: http://dummy-server-node-express.bazzarapp.in
+                  created_at: 2023-12-27T06:47:43.325563
+                  updated_at: 2023-12-27T06:47:43.325563
+                  deleted_at: null
+      deprecated: false
+    put:
+      tags:
+      - Misc
+      summary: PUT /api/projects
+      operationId: PUT/api/projects
+      parameters:
+      - name: Cookie
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: >-
+                {
+                    "project_name": winston-logger,
+                    "description": "Shaharyar07/Dummy-Server-Node-Express",
+                    "repo_url": "Shaharyar07/Dummy-Server-Node-Express",
+                    "container_port": 3000,
+                    "entrypoint": "",
+                    "envs": []
+                }
+            example: >-
+              {
+                  "project_name": winston-logger,
+                  "description": "Shaharyar07/Dummy-Server-Node-Express",
+                  "repo_url": "Shaharyar07/Dummy-Server-Node-Express",
+                  "container_port": 3000,
+                  "entrypoint": "",
+                  "envs": []
+              }
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PUTapiprojects'
+                - example:
+                    message: Project updated
+                    data:
+                      id: 5
+                      user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                      project_name: Dummy-Server-Node-Express
+                      description: Shaharyar07/Dummy-Server-Node-Express
+                      repo_url: Shaharyar07/Dummy-Server-Node-Express
+                      host_port: 5004
+                      container_port: 3000
+                      entrypoint: ''
+                      envs: []
+                      deployment_state: DEPLOYED
+                      deployment_error: ''
+                      public_host: http://dummy-server-node-express.bazzarapp.in
+                      created_at: 2023-12-27T06:47:43.325563
+                      updated_at: 2023-12-27T06:47:43.325563
+                      deleted_at: null
+              example:
+                message: Project updated
+                data:
+                  id: 5
+                  user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                  project_name: Dummy-Server-Node-Express
+                  description: Shaharyar07/Dummy-Server-Node-Express
+                  repo_url: Shaharyar07/Dummy-Server-Node-Express
+                  host_port: 5004
+                  container_port: 3000
+                  entrypoint: ''
+                  envs: []
+                  deployment_state: DEPLOYED
+                  deployment_error: ''
+                  public_host: http://dummy-server-node-express.bazzarapp.in
+                  created_at: 2023-12-27T06:47:43.325563
+                  updated_at: 2023-12-27T06:47:43.325563
+                  deleted_at: null
+      deprecated: false
+    delete:
+      tags:
+      - Misc
+      summary: DELETE /api/projects
+      operationId: DELETE/api/projects
+      parameters:
+      - name: Cookie
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: pvisitor=28863fa7-927b-405c-9f81-f21725e7d724; sb-nmgklmsdzbdruerlwuop-auth-token-code-verifier=%2221e829772c22cebebd04fe4a0793e78fe226b10b56d373753fa7e6cf0094ab084b8def472d2e8f9f8927968b2fec918673a830705a5b6959%22; sb-nmgklmsdzbdruerlwuop-auth-token=%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6IlFDMHRLQjdjTEJKV3htQXgiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzAzNjYzMjA2LCJpYXQiOjE3MDM2NTk2MDYsImlzcyI6Imh0dHBzOi8vbm1na2xtc2R6YmRydWVybHd1b3Auc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjE0ZThjMTdkLTY3NWQtNGM3Ni1hMjA5LWU5ZjU5Njg3NDkwOCIsImVtYWlsIjoibXIuc3VtaXRhZ3Jhd2FsLjE3QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzAzNjU5NjA2fV0sInNlc3Npb25faWQiOiI4MDUzMTljNC1mNThhLTQ4YzYtYTI1OC00ZTUzMGQyOGZkYjMifQ.7Azy-aOJvtKNdvQLhZMmJIWZQJPSgZTnFM6C_qf_kz8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1703663206%2C%22refresh_token%22%3A%22ujzOlHMXk3pfJZ_MmindTg%22%2C%22user%22%3A%7B%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222023-12-20T18%3A02%3A08.584734Z%22%2C%22confirmed_at%22%3A%222023-12-20T18%3A02%3A20.439032Z%22%2C%22last_sign_in_at%22%3A%222023-12-27T06%3A46%3A46.398514361Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2289937fbb-1102-44a5-9cf1-6bc10c8f8e82%22%2C%22id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22user_id%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%2C%22identity_data%22%3A%7B%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2214e8c17d-675d-4c76-a209-e9f596874908%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222023-12-20T18%3A02%3A08.581654Z%22%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22updated_at%22%3A%222023-12-20T18%3A02%3A08.581702Z%22%2C%22email%22%3A%22mr.sumitagrawal.17%40gmail.com%22%7D%5D%2C%22created_at%22%3A%222023-12-20T18%3A02%3A08.576491Z%22%2C%22updated_at%22%3A%222023-12-27T06%3A46%3A46.401679Z%22%7D%7D
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/DELETEapiprojects'
+                - example:
+                    message: Project deleted
+                    data:
+                      id: 5
+                      user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                      project_name: Dummy-Server-Node-Express
+                      description: Shaharyar07/Dummy-Server-Node-Express
+                      repo_url: Shaharyar07/Dummy-Server-Node-Express
+                      host_port: 5004
+                      container_port: 3000
+                      entrypoint: ''
+                      envs: []
+                      deployment_state: DEPLOYED
+                      deployment_error: ''
+                      public_host: http://dummy-server-node-express.bazzarapp.in
+                      created_at: 2023-12-27T06:47:43.325563
+                      updated_at: 2023-12-27T06:47:43.325563
+                      deleted_at: 2023-12-27T06:53:13
+              example:
+                message: Project deleted
+                data:
+                  id: 5
+                  user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+                  project_name: Dummy-Server-Node-Express
+                  description: Shaharyar07/Dummy-Server-Node-Express
+                  repo_url: Shaharyar07/Dummy-Server-Node-Express
+                  host_port: 5004
+                  container_port: 3000
+                  entrypoint: ''
+                  envs: []
+                  deployment_state: DEPLOYED
+                  deployment_error: ''
+                  public_host: http://dummy-server-node-express.bazzarapp.in
+                  created_at: 2023-12-27T06:47:43.325563
+                  updated_at: 2023-12-27T06:47:43.325563
+                  deleted_at: 2023-12-27T06:53:13
+      deprecated: false
+components:
+  schemas:
+    GETapiprojects:
+      title: GETapiprojects
+      required:
+      - message
+      - data
+      type: object
+      properties:
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Datum'
+          description: ''
+      example:
+        message: Projects fetched
+        data:
+        - id: 4
+          user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+          project_name: test123
+          description: ''
+          repo_url: devashar13/todobackend
+          host_port: 5003
+          container_port: 8081
+          entrypoint: '["node","server.js"]'
+          envs: []
+          deployment_state: DESTROYED
+          deployment_error: ''
+          public_host: http://test123.bazzarapp.in
+          created_at: 2023-12-26T20:26:18.799857
+          updated_at: 2023-12-26T20:26:18.799857
+          deleted_at: 2023-12-26T20:28:45.565
+        - id: 5
+          user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+          project_name: Dummy-Server-Node-Express
+          description: Shaharyar07/Dummy-Server-Node-Express
+          repo_url: Shaharyar07/Dummy-Server-Node-Express
+          host_port: 5004
+          container_port: 3000
+          entrypoint: ''
+          envs: []
+          deployment_state: DEPLOYED
+          deployment_error: ''
+          public_host: http://dummy-server-node-express.bazzarapp.in
+          created_at: 2023-12-27T06:47:43.325563
+          updated_at: 2023-12-27T06:47:43.325563
+          deleted_at: null
+        - id: 3
+          user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+          project_name: winston-logger
+          description: davidctj/winston-logger
+          repo_url: davidctj/winston-logger
+          host_port: 5002
+          container_port: 3000
+          entrypoint: '["node","index.js"]'
+          envs: []
+          deployment_state: DEPLOYED
+          deployment_error: ''
+          public_host: http://winston-logger.bazzarapp.in
+          created_at: 2023-12-26T14:41:08.181164
+          updated_at: 2023-12-26T14:41:08.181164
+          deleted_at: null
+    Datum:
+      title: Datum
+      required:
+      - id
+      - user_id
+      - project_name
+      - description
+      - repo_url
+      - host_port
+      - container_port
+      - entrypoint
+      - envs
+      - deployment_state
+      - deployment_error
+      - public_host
+      - created_at
+      - updated_at
+      - deleted_at
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        user_id:
+          type: string
+        project_name:
+          type: string
+        description:
+          type: string
+        repo_url:
+          type: string
+        host_port:
+          type: integer
+          format: int32
+        container_port:
+          type: integer
+          format: int32
+        entrypoint:
+          type: string
+        envs:
+          type: array
+          items:
+            type: string
+          description: ''
+        deployment_state:
+          type: string
+        deployment_error:
+          type: string
+        public_host:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+          nullable: true
+      example:
+        id: 4
+        user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+        project_name: test123
+        description: ''
+        repo_url: devashar13/todobackend
+        host_port: 5003
+        container_port: 8081
+        entrypoint: '["node","server.js"]'
+        envs: []
+        deployment_state: DESTROYED
+        deployment_error: ''
+        public_host: http://test123.bazzarapp.in
+        created_at: 2023-12-26T20:26:18.799857
+        updated_at: 2023-12-26T20:26:18.799857
+        deleted_at: 2023-12-26T20:28:45.565
+    POSTapiprojects:
+      title: POSTapiprojects
+      required:
+      - message
+      - data
+      type: object
+      properties:
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Data'
+      example:
+        message: Project created
+        data:
+          id: 5
+          user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+          project_name: Dummy-Server-Node-Express
+          description: Shaharyar07/Dummy-Server-Node-Express
+          repo_url: Shaharyar07/Dummy-Server-Node-Express
+          host_port: 5004
+          container_port: 3000
+          entrypoint: ''
+          envs: []
+          deployment_state: PROJECT_CREATED
+          deployment_error: ''
+          public_host: http://dummy-server-node-express.bazzarapp.in
+          created_at: 2023-12-27T06:47:43.325563
+          updated_at: 2023-12-27T06:47:43.325563
+          deleted_at: null
+    Data:
+      title: Data
+      required:
+      - id
+      - user_id
+      - project_name
+      - description
+      - repo_url
+      - host_port
+      - container_port
+      - entrypoint
+      - envs
+      - deployment_state
+      - deployment_error
+      - public_host
+      - created_at
+      - updated_at
+      - deleted_at
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        user_id:
+          type: string
+        project_name:
+          type: string
+        description:
+          type: string
+        repo_url:
+          type: string
+        host_port:
+          type: integer
+          format: int32
+        container_port:
+          type: integer
+          format: int32
+        entrypoint:
+          type: string
+        envs:
+          type: array
+          items:
+            type: string
+          description: ''
+        deployment_state:
+          type: string
+        deployment_error:
+          type: string
+        public_host:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+          nullable: true
+      example:
+        id: 5
+        user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+        project_name: Dummy-Server-Node-Express
+        description: Shaharyar07/Dummy-Server-Node-Express
+        repo_url: Shaharyar07/Dummy-Server-Node-Express
+        host_port: 5004
+        container_port: 3000
+        entrypoint: ''
+        envs: []
+        deployment_state: PROJECT_CREATED
+        deployment_error: ''
+        public_host: http://dummy-server-node-express.bazzarapp.in
+        created_at: 2023-12-27T06:47:43.325563
+        updated_at: 2023-12-27T06:47:43.325563
+        deleted_at: null
+    PUTapiprojects:
+      title: PUTapiprojects
+      required:
+      - message
+      - data
+      type: object
+      properties:
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Data'
+      example:
+        message: Project updated
+        data:
+          id: 5
+          user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+          project_name: Dummy-Server-Node-Express
+          description: Shaharyar07/Dummy-Server-Node-Express
+          repo_url: Shaharyar07/Dummy-Server-Node-Express
+          host_port: 5004
+          container_port: 3000
+          entrypoint: ''
+          envs: []
+          deployment_state: DEPLOYED
+          deployment_error: ''
+          public_host: http://dummy-server-node-express.bazzarapp.in
+          created_at: 2023-12-27T06:47:43.325563
+          updated_at: 2023-12-27T06:47:43.325563
+          deleted_at: null
+    DELETEapiprojects:
+      title: DELETEapiprojects
+      required:
+      - message
+      - data
+      type: object
+      properties:
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Data2'
+      example:
+        message: Project deleted
+        data:
+          id: 5
+          user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+          project_name: Dummy-Server-Node-Express
+          description: Shaharyar07/Dummy-Server-Node-Express
+          repo_url: Shaharyar07/Dummy-Server-Node-Express
+          host_port: 5004
+          container_port: 3000
+          entrypoint: ''
+          envs: []
+          deployment_state: DEPLOYED
+          deployment_error: ''
+          public_host: http://dummy-server-node-express.bazzarapp.in
+          created_at: 2023-12-27T06:47:43.325563
+          updated_at: 2023-12-27T06:47:43.325563
+          deleted_at: 2023-12-27T06:53:13
+    Data2:
+      title: Data2
+      required:
+      - id
+      - user_id
+      - project_name
+      - description
+      - repo_url
+      - host_port
+      - container_port
+      - entrypoint
+      - envs
+      - deployment_state
+      - deployment_error
+      - public_host
+      - created_at
+      - updated_at
+      - deleted_at
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        user_id:
+          type: string
+        project_name:
+          type: string
+        description:
+          type: string
+        repo_url:
+          type: string
+        host_port:
+          type: integer
+          format: int32
+        container_port:
+          type: integer
+          format: int32
+        entrypoint:
+          type: string
+        envs:
+          type: array
+          items:
+            type: string
+          description: ''
+        deployment_state:
+          type: string
+        deployment_error:
+          type: string
+        public_host:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+      example:
+        id: 5
+        user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+        project_name: Dummy-Server-Node-Express
+        description: Shaharyar07/Dummy-Server-Node-Express
+        repo_url: Shaharyar07/Dummy-Server-Node-Express
+        host_port: 5004
+        container_port: 3000
+        entrypoint: ''
+        envs: []
+        deployment_state: DEPLOYED
+        deployment_error: ''
+        public_host: http://dummy-server-node-express.bazzarapp.in
+        created_at: 2023-12-27T06:47:43.325563
+        updated_at: 2023-12-27T06:47:43.325563
+        deleted_at: 2023-12-27T06:53:13
+    GETByIDapiprojectsproject_namewinston-logger:
+      title: GETByIDapiprojectsproject_namewinston-logger
+      required:
+      - message
+      - data
+      type: object
+      properties:
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Data'
+      example:
+        message: Projects fetched
+        data:
+          id: 3
+          user_id: 14e8c17d-675d-4c76-a209-e9f596874908
+          project_name: winston-logger
+          description: davidctj/winston-logger
+          repo_url: davidctj/winston-logger
+          host_port: 5002
+          container_port: 3000
+          entrypoint: '["node","index.js"]'
+          envs: []
+          deployment_state: DEPLOYED
+          deployment_error: ''
+          public_host: http://winston-logger.bazzarapp.in
+          created_at: 2023-12-26T14:41:08.181164
+          updated_at: 2023-12-26T14:41:08.181164
+          deleted_at: null
+tags:
+- name: Misc
+  description: ''
